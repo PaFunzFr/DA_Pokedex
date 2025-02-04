@@ -46,6 +46,11 @@ header {
     transition: transform 0.3s;
 }
 
+.main-pic {
+    width: auto;
+    height: 200px;
+}
+
 .pokemon-card:hover {
     transform: scale(1.05);
 }
