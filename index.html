@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="">
+    <header>
+        <h1>Pokedex</h1>
+        <div id="search-container">
+            <input type="text" id="search-bar" placeholder="Suche nach Pokémon...">
+            <button id="filter-button" onclick="">Filter</button>
+        </div>
+    </header>
+
+    <div id="pokemon-container">
+        <!-- rendered Pokemon here -->
+    </div>
+
+    <div id="load-more-container">
+        <button id="load-button">Mehr Pokémon laden</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
+    </footer>
+
+    <div id="pokemon-detail-modal">
+        <div id="pokemon-detail-content">
+            <button id="prev-pokemon">Previous</button>
+            <button id="next-pokemon">Next</button>
+            <div id="pokemon-details">
+                <!-- dynamic details here -->
+            </div>
+            <button id="close-modal">Schließen</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
