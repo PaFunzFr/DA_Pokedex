@@ -105,3 +105,8 @@ button {
 button:hover {
     background-color: #cc5200;
 }
+
+.stat-bar {
+    height: 20px;
+    background-color: blue;
+}
