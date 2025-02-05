@@ -6,13 +6,15 @@ function renderPokemonCards(offset) {
         card.classList.add("pokemon-card");
         card.classList.add(`${pokemon.types[0].type.name}`);
         card.dataset.name = pokemon.name;
-        card.dataset.id = pokemon.id;
         card.innerHTML += `
             <h3>${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
             <p>#${pokemon.id}</p>
             <img class="main-pic" src="${imgSrc}" alt="${pokemon.name}">
             <div class="types">${pokemon.types.map(types => `<div class="type-info ${types.type.name}">${types.type.name}</div>`).join("")}</div>
         `;
+        card.addEventListener("click", () => {
+            openModal(pokemon.id);
+        });
         pokemonContainer.appendChild(card);
     }
 }

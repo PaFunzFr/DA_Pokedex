@@ -1,5 +1,5 @@
 :root {
-    
-    --transition: all 0.3s ease;
 
+    --transition: all 0.3s ease;
+    --spinner-color: rgb(47, 47, 47);
 }
