@@ -6,37 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/style_type_colors.css">
 </head>
 
 <body onload="init();">
     <header>
         <h1>Pokedex</h1>
-        <div id="search-container">
-            <input type="text" id="search-bar" placeholder="Suche nach Pokémon...">
-            <button id="filter-button" onclick="">Filter</button>
+        <div class="search-container" id="searchContainer">
+            <input type="text" class="search-bar" id="searchBar" placeholder="Suche nach Pokémon...">
+            <button class="filter-btn" id="filterButton" onclick="">Filter</button>
         </div>
     </header>
+    <main>
+        <div class="pokemon-container" id="pokemonContainer">
+            <!-- rendered Pokemon here -->
+        </div>
 
-    <div id="pokemon-container">
-        <!-- rendered Pokemon here -->
-    </div>
-
-    <div id="load-more-container">
-        <button id="load-button">Mehr Pokémon laden</button>
-    </div>
-
+        <div class="load-more" id="moreContainer">
+            <button class="load-btn" id="loadButton">Mehr Pokémon laden</button>
+        </div>
+    </main>
     <footer>
         <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
     </footer>
 
-    <div id="pokemon-detail-modal">
-        <div id="pokemon-detail-content">
-            <button id="prev-pokemon">Previous</button>
-            <button id="next-pokemon">Next</button>
-            <div id="pokemon-details">
+    <div class="pokemon-details-container" id="pokemonDetailModal">
+        <div class="pok-detail-content" id="pokemonDetailContent">
+            <button id="prevPok">Previous</button>
+            <button id="nextPok">Next</button>
+            <div id="pokemonDetails">
                 <!-- dynamic details here -->
             </div>
-            <button id="close-modal">Schließen</button>
+            <button id="closeModal">Schließen</button>
         </div>
     </div>
 
