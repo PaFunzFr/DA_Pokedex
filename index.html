@@ -18,12 +18,15 @@
         </div>
     </header>
     <main>
+        <div id="spinner" class="spinner hidden">
+            <div class="spinner-border"></div>
+            <div class="spinner-top"></div>
+            <div class="spinner-middle"></div>
+            <div class="spinner-bottom"></div>
+            <div class="spinner-center"></div>
+        </div>
         <div class="pokemon-container" id="pokemonContainer">
             <!-- rendered Pokemon here -->
-        </div>
-
-        <div class="load-more" id="moreContainer">
-            <button class="load-btn" id="loadButton">Mehr Pokémon laden</button>
         </div>
     </main>
     <footer>
@@ -41,7 +44,8 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
 
+</body>
+    <script src="./templates/template.js"></script>
+    <script src="script.js"></script>
 </html>

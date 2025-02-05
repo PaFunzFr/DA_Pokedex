@@ -1,94 +1,112 @@
 :root {
     --normal: #A8A77A;
+    --normal-dark: #7d7c5a;
     --fire: #EE8130;
+    --fire-dark: #9e5620;
     --water: #6390F0;
+    --water-dark: #4464aa;
     --electric: #F7D02C;
+    --electric-dark: #b99b21;
     --grass: #7AC74C;
+    --grass-dark: #518633;
     --ice: #96D9D6;
+    --ice-dark: #74aca9;
     --fighting: #C22E28;
+    --fighting-dark: #8c211d;
     --poison: #A33EA1;
+    --poison-dark: #742c72;
     --ground: #E2BF65;
+    --ground-dark: #a78c49;
     --flying: #A98FF3;
+    --flying-dark: #816cbb;
     --psychic: #F95587;
+    --psychic-dark: #a93a5c;
     --bug: #A6B91A;
+    --bug-dark: #748115;
     --rock: #B6A136;
+    --rock-dark: #796b22;
     --ghost: #735797;
+    --ghost-dark: #403056;
     --dragon: #6F35FC;
+    --dragon-dark: #4622a2;
     --dark: #705746;
+    --dark-dark: #49382c;
     --steel: #B7B7CE;
+    --steel-dark: #6b6b7a;
     --fairy: #D685AD;
+    --fairy-dark: #83506a;
 }
 
 .normal {
-    background: linear-gradient(to bottom, var(--normal) 30%, #7d7c5a);
+    background: linear-gradient(to bottom, var(--normal) 30%, var(--normal-dark));
 }
 
 .fire {
-    background: linear-gradient(to bottom, var(--fire) 30%, #9e5620);
+    background: linear-gradient(to bottom, var(--fire) 30%, var(--fire-dark));
 }
 
 .water {
-    background-color: var(--water);
+    background: linear-gradient(to bottom, var(--water) 30%, var(--water-dark));
 }
 
 .electric {
-    background-color: var(--electric);
+    background: linear-gradient(to bottom, var(--electric) 30%, var(--electric-dark));
 }
 
 .grass {
-    background-color: var(--grass);
+    background: linear-gradient(to bottom, var(--grass) 30%, var(--grass-dark));
 }
 
 .ice {
-    background-color: var(--ice);
+    background: linear-gradient(to bottom, var(--ice) 30%, var(--ice-dark));
 }
 
 .fighting {
-    background-color: var(--fighting);
+    background: linear-gradient(to bottom, var(--fighting) 30%, var(--fighting-dark));
 }
 
 .poison {
-    background-color: var(--poison);
+    background: linear-gradient(to bottom, var(--poison) 30%, var(--poison-dark));
 }
 
 .ground {
-    background-color: var(--ground);
+    background: linear-gradient(to bottom, var(--ground) 30%, var(--ground-dark));
 }
 
 .flying {
-    background-color: var(--flying);
+    background: linear-gradient(to bottom, var(--flying) 30%, var(--flying-dark));
 }
 
 .psychic {
-    background-color: var(--psychic);
+    background: linear-gradient(to bottom, var(--psychic) 30%, var(--psychic-dark));
 }
 
 .bug {
-    background-color: var(--bug);
+    background: linear-gradient(to bottom, var(--bug) 30%, var(--bug-dark));
 }
 
 .rock {
-    background-color: var(--rock);
+    background: linear-gradient(to bottom, var(--rock) 30%, var(--rock-dark));
 }
 
 .ghost {
-    background-color: var(--ghost);
+    background: linear-gradient(to bottom, var(--ghost) 30%, var(--ghost-dark));
 }
 
 .dragon {
-    background-color: var(--dragon);
+    background: linear-gradient(to bottom, var(--dragon) 30%, var(--dragon-dark));
 }
 
 .dark {
-    background-color: var(--dark);
+    background: linear-gradient(to bottom, var(--dark) 30%, var(--dark-dark));
 }
 
 .steel {
-    background-color: var(--steel);
+    background: linear-gradient(to bottom, var(--steel) 30%, var(--steel-dark));
 }
 
 .fairy {
-    background-color: var(--fairy);
+    background: linear-gradient(to bottom, var(--fairy) 30%, var(--fairy-dark));
 }
 
 /* 
