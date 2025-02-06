@@ -26,16 +26,17 @@ function renderModal(index) {
             <div id="pokemonDetails">
                 <h2 class="${isPokemonLegendaryTitle(index)}">${allPokemonInfos[index].name}</h2>
                 <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
+                <img class="poke-cry" onclick="playCry(${index})" src="../assets/img/03_general/play_sound.png">
                 <div id="general-properties">
                 <div class="modal-infos">
                     <ul class="modal-categories">
-                        <li onclick="showGeneralStats(${index}), playCry(${index})">General</li>
+                        <li onclick="showGeneralStats(${index})">General</li>
                         <li onclick="showAttributes(${index})">Attributes</li>
                         <li onclick="showEvolutionChain(${index})">Evolution</li>
                     </ul>
                     <div id="modalContent"></div>
-                    <button id="prevPok">Previous</button>
-                    <button id="nextPok">Next</button>
+                    <img src="../assets/img/03_general/arrow2.png" class="triangle-button" id="prevPok">
+                    <img src="../assets/img/03_general/arrow2.png" class="triangle-button" id="nextPok">
                 </div>
             </div>
         </div>`;
@@ -102,9 +103,47 @@ function showGeneralStats(index) {
     `;
 }
 
-function showEvolutionChain(index) {
-    document.getElementById('modalContent').innerHTML = "";
-    document.getElementById('modalContent').innerHTML = `
-        <p>Test</p>
-    `
+async function showEvolutionChain(index) {
+    try {
+        const evolutions = await fetchEvolutionChain(index);
+        const firstPokemonId = evolutions.chain.species.url.split('/')[6];
+        let evolutionHTML = "<div class='evolution-container'>";
+        
+        evolutionHTML += `
+            <div class="evolution-step">
+                <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
+            </div>
+            <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
+        
+        if (evolutions.chain.evolves_to?.[0]?.species?.url) {
+            const secondPokemonId = evolutions.chain.evolves_to[0].species.url.split('/')[6];
+            evolutionHTML += `
+                <div class="evolution-step">
+                    <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
+                </div>`;
+        }
+
+        if (evolutions.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.url) {
+            const thirdPokemonId = evolutions.chain.evolves_to[0].evolves_to[0].species.url.split('/')[6];
+            evolutionHTML += `
+                <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">
+                <div class="evolution-step">
+                    <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdPokemonId}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
+                </div>`;
+        }
+
+        evolutionHTML += "</div>";
+
+        if (evolutionHTML === "" || evolutions.chain.evolves_to.length === 0) {
+            document.getElementById('modalContent').innerHTML = "<p>Theres is no evolution for this Pokemon</p>";
+        } else {
+            document.getElementById('modalContent').innerHTML = evolutionHTML;
+        }
+
+    } catch (error) {
+        console.error("Fehler beim Anzeigen der Evolution:", error);
+        document.getElementById('modalContent').innerHTML = "<p>Error while loading evolution data</p>";
+    }
 }
+
+

@@ -28,10 +28,11 @@ h2 {
 }
 
 header {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 100%;
     background-color: #ffcc00;
-    padding: 10px;
     text-align: center;
     filter: drop-shadow(0 24px 10px rgba(0, 0, 0, 0.5));
     z-index: 999;
@@ -41,6 +42,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 30px;
 }
 
 .max-width {
@@ -50,6 +52,7 @@ header {
 
 main {
     flex: 1;
+    margin-top: 80px;
 }
 
 .search-bar {
@@ -118,7 +121,7 @@ main {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
     display: none;
     justify-content: center;
     align-items: center;
@@ -130,10 +133,24 @@ main {
     filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
 }
 
+.poke-cry {
+    position: absolute;
+    top: 280px;
+    right: 10px;
+    width: 40px;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+}
+
+.poke-cry:hover {
+    opacity: 0.7;
+    transform: scale(1.01);
+    cursor: pointer;
+}
+
 .modal-infos {
-    background: rgba(255, 255, 255, 0.474);
+    background: linear-gradient(to top, rgba(255, 255, 255, 0.474) 85%, transparent);
     width: 100%;
-    padding-top: 20px;
     border-radius: 12px;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.524));
     height: 300px;
@@ -142,13 +159,30 @@ main {
 .modal-categories {
     display: flex;
     justify-content: space-between;
-    font-size: 12px;
+    font-size: 20px;
+    font-family: 'Bubblegum Sans';
     list-style-type: none;
     padding: 0;
     width: 100%;
 }
 
+.modal-categories li {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.231);
+    border: 1px solid rgba(193, 193, 193, 0.619);
+    height: 36px;
+    padding-top: 20px;
+    border-radius: 10px 10px 0 0;
+    transition: all 0.3s ease;
+}
+
+.modal-categories li:hover {
+    font-size: 22px;
+    cursor: pointer;
+}
+
 .pok-detail-content {
+    position: relative;
     border-radius: 15px;
     min-width: 270px;
     max-width: 360px;
@@ -165,7 +199,7 @@ main {
     gap: 5px;
 }
 
-.modal-attributes li{
+.modal-attributes li {
     display: flex;
     align-items: center;
     padding: 0 10px;
@@ -201,19 +235,6 @@ main {
     border-radius: 5px;
 }
 
-button {
-    padding: 10px;
-    background-color: #ff6600;
-    color: white;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-button:hover {
-    background-color: #cc5200;
-}
-
 .stat-bar {
     height: 20px;
     background-color: blue;
@@ -231,6 +252,47 @@ button:hover {
     margin: 0;
     padding: 8px 16px;
 }
+
+#nextPok,
+#prevPok {
+    position: absolute;
+    width: 50px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+#prevPok {
+    top: -350px;
+    left: 0px;
+    transform: rotate(180deg);
+}
+
+#nextPok {
+    right: 0px;
+    top: -350px;
+}
+
+.evo-img {
+    width: 90px;
+    flex: 1;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.704));
+}
+
+.evolution-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-top: 70px;
+    height: 100px;
+}
+
+.evo-arrow {
+    height: 60px;
+    width: 20px;
+    opacity: 0.15;
+}
+
 /* LEGENDARY ANIMATIONS */
 .legendary {
     position: relative;

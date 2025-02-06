@@ -144,6 +144,7 @@ function openModal(pokemonId) {
     renderModal(selectedPokemon);
     showGeneralStats(selectedPokemon);
     pokemonDetailModal.style.display ="flex";
+    disableScroll();
 }
 
 function calculateBarWidth(value) {
@@ -167,11 +168,32 @@ function playCry(index) {
 function isPokemonLegendary(index) {
     if (allPokemonSpecies[index].is_legendary || allPokemonSpecies[index].is_mythical) {
         return "legendary";
+    } else {
+        return "common";
     }
 }
 
 function isPokemonLegendaryTitle(index) {
     if (allPokemonSpecies[index].is_legendary || allPokemonSpecies[index].is_mythical) {
         return "legendary-name";
+    } else {
+        return "common";
+    }
+}
+
+async function fetchEvolutionChain(pokemonId) {
+    try {
+        const evolutionUrl = allPokemonSpecies[pokemonId].evolution_chain.url;
+        const response = await fetch(`${evolutionUrl}`);
+        const responseAsJson = await response.json();
+        if (!responseAsJson || !responseAsJson.chain) {
+            console.error("no evolution existing");
+            return null;
+        }
+        
+        return responseAsJson;
+    } catch (error) {
+        console.error("Error while loading Poke API", error);
+        return null;
     }
 }
