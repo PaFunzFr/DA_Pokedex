@@ -147,7 +147,7 @@ function openModal(pokemonId) {
 }
 
 function calculateBarWidth(value) {
-    const maxWidth = 150;
+    const maxWidth = 200;
     const maxStatValue = 255;
     const percentage = (value / maxStatValue) * 100;
     return (percentage / 100) * maxWidth;

@@ -13,18 +13,45 @@ body {
     display: none;
 }
 
+h1, h2 {
+    font-family: 'Bubblegum Sans';
+}
+
+h1 {
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 30px;
+    margin: 10px 0 0 0;
+}
+
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: sticky;
+    top: 0;
     background-color: #ffcc00;
     padding: 10px;
     text-align: center;
+    filter: drop-shadow(0 24px 10px rgba(0, 0, 0, 0.5));
+    z-index: 999;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.max-width {
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
 main {
     flex: 1;
 }
+
 .search-bar {
     padding: 5px;
     font-size: 16px;
@@ -50,7 +77,7 @@ main {
 .pokemon-card {
     box-sizing: border-box;
     width: 240px;
-    margin: 10px;
+    margin: 11px;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -61,6 +88,7 @@ main {
 .main-pic {
     width: auto;
     height: 200px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
 }
 
 .pokemon-card:hover {
@@ -94,18 +122,20 @@ main {
     display: none;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
 
 .modal-img {
     width: 280px;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
 }
 
 .modal-infos {
-    background-color: rgb(220, 220, 220);
+    background: rgba(255, 255, 255, 0.474);
     width: 100%;
     padding-top: 20px;
-    border-radius: 15px 15px 0 0;
-    filter: drop-shadow(0px -3px 2px rgba(0, 0, 0, 0.5));
+    border-radius: 12px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.524));
     height: 300px;
 }
 
@@ -119,11 +149,13 @@ main {
 }
 
 .pok-detail-content {
-    background-color: white;
-    border-radius: 10px;
-    max-width: 300px;
+    border-radius: 15px;
+    min-width: 270px;
+    max-width: 360px;
+    padding: 8px;
     width: 100%;
     text-align: center;
+    margin: 0 10px;
 }
 
 .modal-attributes {
@@ -163,7 +195,8 @@ main {
     height: 10px;
     top: 0;
     left: 0;
-    width: 150px;
+    flex: 1;
+    width: 200px; /* to be adjusted with media query */
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
@@ -203,14 +236,30 @@ button:hover {
     position: relative;
     border: 3px solid rgb(131, 113, 13);
     animation: shimmer 5s infinite linear;
+    filter: drop-shadow(0 0 2px gold) drop-shadow(0 0 6px yellow) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
 }
 
 @keyframes shimmer {
-    0% { border-color: gold; }
-    25% { border-color: rgba(255, 71, 84, 0.97); }
-    50% { border-color: yellow;}
-    75% { border-color: rgb(255, 94, 2);}
-    100% { border-color: gold;  }
+    0% { 
+        border-color: gold; 
+        filter: drop-shadow(0 0 2px gold) drop-shadow(0 0 6px yellow) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+    }
+    25% { 
+        border-color: rgba(255, 71, 84, 0.97);
+        filter: drop-shadow(0 0 2px rgba(255, 71, 84, 0.97)) drop-shadow(0 0 6px rgb(255, 94, 2)) drop-shadow(0 0 5px yellow);
+    }
+    50% { 
+        border-color: yellow;
+        filter: drop-shadow(0 0 2px yellow) drop-shadow(0 0 6px gold) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+    }
+    75% { 
+        border-color: rgb(255, 94, 2);
+        filter: drop-shadow(0 0 2px rgb(255, 94, 2)) drop-shadow(0 0 6px rgba(255, 71, 84, 0.97)) drop-shadow(0 0 5px gold);
+    }
+    100% { 
+        border-color: gold;  
+        filter: drop-shadow(0 0 2px gold) drop-shadow(0 0 6px yellow) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+    }
 }
 
 .legendary-name {

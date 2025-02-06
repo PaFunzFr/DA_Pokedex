@@ -8,7 +8,7 @@ function renderPokemonCards(offset) {
         card.classList.add(`${isPokemonLegendary(i)}`);
         card.dataset.name = pokemon.name;
         card.innerHTML += `
-            <h3 class="${isPokemonLegendaryTitle(i)}">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
+            <h2 class="${isPokemonLegendaryTitle(i)}">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
             <p>#${pokemon.id}</p>
             <img class="main-pic" src="${imgSrc}" alt="${pokemon.name}">
             <div class="types">${pokemon.types.map(types => `<div class="type-info ${types.type.name}">${types.type.name}</div>`).join("")}</div>
@@ -22,22 +22,22 @@ function renderPokemonCards(offset) {
 
 function renderModal(index) {
     return pokemonDetailModal.innerHTML = `
-        <div class="pok-detail-content " id="pokemonDetailContent">
+        <div class="pok-detail-content ${isPokemonLegendary(index)} ${allPokemonInfos[index].types[0].type.name}" id="pokemonDetailContent">
             <div id="pokemonDetails">
-                <h2>${allPokemonInfos[index].name}</h2>
+                <h2 class="${isPokemonLegendaryTitle(index)}">${allPokemonInfos[index].name}</h2>
                 <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
-                <div id="general-properties" class="">
-                <div class="modal-infos ${allPokemonInfos[index].types[0].type.name}">
+                <div id="general-properties">
+                <div class="modal-infos">
                     <ul class="modal-categories">
                         <li onclick="showGeneralStats(${index}), playCry(${index})">General</li>
                         <li onclick="showAttributes(${index})">Attributes</li>
                         <li onclick="showEvolutionChain(${index})">Evolution</li>
                     </ul>
                     <div id="modalContent"></div>
+                    <button id="prevPok">Previous</button>
+                    <button id="nextPok">Next</button>
                 </div>
             </div>
-            <button id="prevPok">Previous</button>
-            <button id="nextPok">Next</button>
         </div>`;
 };
 
