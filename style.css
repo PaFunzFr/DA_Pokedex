@@ -23,7 +23,7 @@ h1 {
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 36px;
     margin: 10px 0;
 }
 
@@ -105,10 +105,11 @@ main {
     position: absolute;
     top: 52%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(1.8);
+    width: 210px;
+    transform: translate(-50%, -50%) scale(1.15);
     opacity: 0.2;
     z-index: 0;
-    filter: blur(2px);
+    filter: blur(4px);
 }
 
 .pokemon-card:hover {
@@ -142,17 +143,24 @@ main {
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 50;
 }
 
 .modal-img {
+    height: 280px;
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.945));
+}
+
+.modal-img-container {
+    display: flex;
     width: 280px;
-    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+    height: 280px;
+    margin: 0 auto;
 }
 
 .poke-cry {
     position: absolute;
-    bottom: 320px;
+    bottom: 300px;
     right: 15px;
     width: 40px;
     opacity: 0.4;
@@ -163,7 +171,7 @@ main {
     position: absolute;
     font-family: 'Bubblegum Sans';
     left: 15px;
-    bottom: 320px;
+    bottom: 300px;
     font-size: 24px;
 }
 
@@ -178,7 +186,7 @@ main {
     width: 100%;
     border-radius: 12px;
     filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.524));
-    height: 300px;
+    height: 280px;
 }
 
 .modal-categories {
@@ -215,6 +223,7 @@ main {
     width: 100%;
     text-align: center;
     margin: 0 10px;
+    max-height: calc(666px - 16px);
 }
 
 .modal-attributes {
@@ -228,19 +237,20 @@ main {
     display: flex;
     align-items: center;
     padding: 0 10px;
-    height: 30px;
 }
 
 .attribute-title {
     display: flex;
     position: relative;
+    font-size: 12px;
+    color: #333;
     width: 110px;
-    margin: 0;
+    margin: 4px 0;
     padding: 0;
 }
 
 .stats-chart {
-    height: 220px;
+    height: 200px;
     margin: -10px 10px 0 10px;
 }
 
@@ -283,29 +293,31 @@ main {
     padding: 8px 16px;
 }
 
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #nextPok,
 #prevPok {
-    position: absolute;
+    font-family: 'Bubblegum Sans';
+    font-size: 30px;
     width: 50px;
     opacity: 0.5;
     cursor: pointer;
+    z-index: 100;
 }
 
-#prevPok {
-    top: -350px;
-    left: 0px;
-    transform: rotate(180deg);
-}
-
-#nextPok {
-    right: 0px;
-    top: -350px;
-}
 
 .evo-img {
     width: 90px;
     flex: 1;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.704));
+}
+
+.evo-name {
+    font-family: 'Bubblegum Sans';
 }
 
 .evolution-container {

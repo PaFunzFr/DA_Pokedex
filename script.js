@@ -19,6 +19,7 @@ async function init() {
     await getPokemonInfos(allPokemonData);
     renderPokemonCards(0);
     hideSpinner();
+    enableScroll();
 }
 
 async function fetchPokemonData(limit, offset) {
@@ -111,11 +112,10 @@ window.addEventListener("scroll", async () => {
 async function loadMorePokemon() {
     if (loading || allPokemonData.length >= 1000) return;
     loading = true;
-
     showSpinner();
     await fetchPokemonData(30, currentShownPokemon);
     await getPokemonInfos(allPokemonData.slice(currentShownPokemon, currentShownPokemon + 30));
-    renderDelayedCards();
+    renderNewCards();
     loading = false;
 }
 
@@ -131,10 +131,10 @@ function hideSpinner() {
 }, 400);
 }
 
-function renderDelayedCards() {
-        renderPokemonCards(currentShownPokemon);
-        currentShownPokemon += 30;
-        hideSpinner()
+function renderNewCards() {
+    renderPokemonCards(currentShownPokemon);
+    currentShownPokemon += 30;
+    hideSpinner();
 }
 
 function disableScroll() {
@@ -151,6 +151,7 @@ function openModal(pokemonId) {
     selectedPokemon = pokemonId -1;
     console.log(`du hast Pokemon ${allPokemonInfos[selectedPokemon].name} ausgewählt`);
     renderModal(selectedPokemon);
+    checkForFirstModalPokemon(selectedPokemon);
     showGeneralStats(selectedPokemon);
     pokemonDetailModal.style.display ="flex";
     disableScroll();
@@ -218,4 +219,42 @@ function formatAttribute(number) {
 
 function formatPokemonId(id) {
     return id.toString().padStart(4, '0');
+}
+
+function formattingFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+async function nextPok() {
+    if (selectedPokemon < allPokemonInfos.length - 1) {
+        selectedPokemon++;
+        openModal(selectedPokemon +1);
+    } else if (selectedPokemon => allPokemonInfos.length -1) {
+        await loadMorePokemon();
+        selectedPokemon++;
+        openModal(selectedPokemon +1);
+        setTimeout(() => {
+            disableScroll();
+        }, 400);
+    }
+}
+
+async function prevPok() {
+    if (selectedPokemon > 0) { 
+        selectedPokemon--;
+        openModal(selectedPokemon + 1);
+    }
+}
+
+function checkForFirstModalPokemon(index) {
+    if (index === 0) {
+        document.getElementById('prevPok').innerText = "";
+    }
+}
+
+function closeModal(event) {
+    if (event.target.id === "pokemonDetailModal") {
+        pokemonDetailModal.style.display = "none";
+        enableScroll();
+    }
 }

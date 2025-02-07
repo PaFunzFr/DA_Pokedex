@@ -8,10 +8,10 @@ function renderPokemonCards(offset) {
         card.classList.add(`${isPokemonLegendary(i)}`);
         card.dataset.name = pokemon.name;
         card.innerHTML += `
-            <h2 class="${isPokemonLegendaryTitle(i)}">${pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
+            <h2 class="${isPokemonLegendaryTitle(i)}">${formattingFirstLetter(pokemon.name)}</h2>
             <p>#${pokemon.id}</p>
             <img class="main-pic" src="${imgSrc}" alt="${pokemon.name}">
-            ${renderPokeBall()}
+            <img class="poke-ball" src="../assets/img/03_general/pokeball.svg">
             <div class="types">${pokemon.types.map(types => `<div class="type-info ${types.type.name}">${types.type.name}</div>`).join("")}</div>
         `;
         card.addEventListener("click", () => {
@@ -25,8 +25,14 @@ function renderModal(index) {
     return pokemonDetailModal.innerHTML = `
         <div class="pok-detail-content ${isPokemonLegendary(index)} ${allPokemonInfos[index].types[0].type.name}" id="pokemonDetailContent">
             <div id="pokemonDetails">
-                <h2 class="${isPokemonLegendaryTitle(index)}">${allPokemonInfos[index].name}</h2>
-                <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
+                <div class="title-container">
+                    <div onclick="prevPok(${index})" id="prevPok"><</div>
+                    <h2 class="${isPokemonLegendaryTitle(index)}">${formattingFirstLetter(allPokemonInfos[index].name)}</h2>
+                    <div onclick="nextPok(${index})" id="nextPok">></div>
+                </div>
+                <div class="modal-img-container">
+                    <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
+                </div>
                 <img class="poke-cry" onclick="playCry(${index})" src="../assets/img/03_general/play_sound.png">
                 <p class="poke-index">#${formatPokemonId(allPokemonInfos[index].id)}</p>
                 <div id="general-properties">
@@ -37,8 +43,6 @@ function renderModal(index) {
                         <li onclick="showEvolutionChain(${index})">Evolution</li>
                     </ul>
                     <div id="modalContent"></div>
-                    <img src="../assets/img/03_general/arrow2.png" class="triangle-button" id="prevPok">
-                    <img src="../assets/img/03_general/arrow2.png" class="triangle-button" id="nextPok">
                 </div>
             </div>
         </div>`;
@@ -60,8 +64,8 @@ function showAttributes(index) {
                 label: 'Stats',
                 data: data,
                 backgroundColor: '#4CAF50',
-                borderColor: '#388E3C',
-                borderWidth: 1
+                borderWidth: 0,
+                borderRadius: 5
             }]
         },
         options: {
@@ -83,7 +87,7 @@ function showAttributes(index) {
             plugins: { legend: { display: false } },
             responsive: true,
             maintainAspectRatio: false
-        }
+        },
     });
 }
 
@@ -105,11 +109,11 @@ function showGeneralStats(index) {
         </li>
         <li>
             <h3 class="attribute-title">Habitat:</h3>
-            <p>${allPokemonSpecies[index].habitat.name}</p>
+            <p>${allPokemonSpecies[index].habitat?.name ? formattingFirstLetter(allPokemonSpecies[index].habitat.name) : "Not available"}</p>
         </li>
         <li>
             <h3 class="attribute-title">Abilities:</h3>
-            <p>${allPokemonInfos[index].id}</p>
+            <p>${allPokemonInfos[index].abilities.slice(0, 2).map(abilty => formattingFirstLetter(abilty.ability.name)).join(', ')}</p>
         </li>
         <li>
             <h3 class="attribute-title">Types:</h3>
@@ -135,11 +139,14 @@ async function showEvolutionChain(index) {
 }
 
 function renderFirstEvolution(evolutions) {
+    if (!evolutions.chain.evolves_to.length) {
+        return "";
+    }
     const firstPokemonId = evolutions.chain.species.url.split('/')[6];
     return `
         <div class="evolution-step">
             <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
-            <p class="evo-name">${evolutions.chain.species.name}</p>
+            <p class="evo-name">${formattingFirstLetter(evolutions.chain.species.name)}</p>
         </div>
         <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
 }
@@ -150,9 +157,8 @@ function renderSecondEvolution(evolutions) {
         return `
             <div class="evolution-step">
                 <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
-                <p class="evo-name">${evolutions.chain.evolves_to[0].species.name}</p>
-            </div>
-            <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
+                <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].species.name)}</p>
+            </div>`;
     }
     return "";
 }
@@ -161,13 +167,15 @@ function renderThirdEvolution(evolutions) {
     if (evolutions.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.url) {
         const thirdPokemonId = evolutions.chain.evolves_to[0].evolves_to[0].species.url.split('/')[6];
         return `
+        <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">
             <div class="evolution-step">
                 <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdPokemonId}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
-                <p class="evo-name">${evolutions.chain.evolves_to[0].evolves_to[0].species.name}</p>
+                <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].evolves_to[0].species.name)}</p>
             </div>`;
     }
     return "";
 }
+
 
 function checkForEvolutionAndRender(evolutionHTML, evolutions) {
     if (evolutionHTML === "<div class='evolution-container'></div>") {
@@ -177,17 +185,6 @@ function checkForEvolutionAndRender(evolutionHTML, evolutions) {
     }
 }
 
-function renderPokeBall() {
-    return `
-        <svg class="poke-ball" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-            <mask id="cutout">
-                <rect width="200" height="200" fill="white" />
-                <circle cx="100" cy="100" r="36" fill="black" />
-            </mask>
-            <path d="M100,10 A90,90 0 0,1 190,100 H10 A90,90 0 0,1 100,10 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
-            <path d="M10,115 H190 A90,90 0 0,1 100,190 A90,90 0 0,1 10,115 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
-            <circle cx="100" cy="100" r="24" fill="black" opacity="0.5" />
-        </svg>`
-}
+
 
 

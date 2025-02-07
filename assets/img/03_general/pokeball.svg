@@ -1,0 +1,9 @@
+<svg class="poke-ball" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <mask id="cutout">
+        <rect width="200" height="200" fill="white" />
+        <circle cx="100" cy="100" r="36" fill="black" />
+    </mask>
+    <path d="M100,10 A90,90 0 0,1 190,100 H10 A90,90 0 0,1 100,10 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
+    <path d="M10,115 H190 A90,90 0 0,1 100,190 A90,90 0 0,1 10,115 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
+    <circle cx="100" cy="100" r="24" fill="black" opacity="0.5" />
+</svg>
