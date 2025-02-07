@@ -122,59 +122,71 @@ function showGeneralStats(index) {
 async function showEvolutionChain(index) {
     try {
         const evolutions = await fetchEvolutionChain(index);
-        const firstPokemonId = evolutions.chain.species.url.split('/')[6];
         let evolutionHTML = "<div class='evolution-container'>";
-        
-        evolutionHTML += `
-            <div class="evolution-step">
-                <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
-                <p class="evo-name">${evolutions.chain.species.name}</p>
-            </div>
-            <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
-        
-        if (evolutions.chain.evolves_to?.[0]?.species?.url) {
-            const secondPokemonId = evolutions.chain.evolves_to[0].species.url.split('/')[6];
-            evolutionHTML += `
-                <div class="evolution-step">
-                    <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
-                    <p class="evo-name">${evolutions.chain.evolves_to[0].species.name}</p>
-                </div>`;
-        }
-
-        if (evolutions.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.url) {
-            const thirdPokemonId = evolutions.chain.evolves_to[0].evolves_to[0].species.url.split('/')[6];
-            evolutionHTML += `
-                <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">
-                <div class="evolution-step">
-                    <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdPokemonId}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
-                    <p class="evo-name">${evolutions.chain.evolves_to[0].evolves_to[0].species.name}</p>
-                </div>`;
-        }
-
+        evolutionHTML += renderFirstEvolution(evolutions);
+        evolutionHTML += renderSecondEvolution(evolutions);
+        evolutionHTML += renderThirdEvolution(evolutions);
         evolutionHTML += "</div>";
-
-        if (evolutionHTML === "" || evolutions.chain.evolves_to.length === 0) {
-            document.getElementById('modalContent').innerHTML = "<p>Theres is no evolution for this Pokemon</p>";
-        } else {
-            document.getElementById('modalContent').innerHTML = evolutionHTML;
-        }
-
+        checkForEvolutionAndRender(evolutionHTML, evolutions);
     } catch (error) {
         console.error("Fehler beim Anzeigen der Evolution:", error);
         document.getElementById('modalContent').innerHTML = "<p>Error while loading evolution data</p>";
     }
 }
 
+function renderFirstEvolution(evolutions) {
+    const firstPokemonId = evolutions.chain.species.url.split('/')[6];
+    return `
+        <div class="evolution-step">
+            <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
+            <p class="evo-name">${evolutions.chain.species.name}</p>
+        </div>
+        <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
+}
+
+function renderSecondEvolution(evolutions) {
+    if (evolutions.chain.evolves_to?.[0]?.species?.url) {
+        const secondPokemonId = evolutions.chain.evolves_to[0].species.url.split('/')[6];
+        return `
+            <div class="evolution-step">
+                <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
+                <p class="evo-name">${evolutions.chain.evolves_to[0].species.name}</p>
+            </div>
+            <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
+    }
+    return "";
+}
+
+function renderThirdEvolution(evolutions) {
+    if (evolutions.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.url) {
+        const thirdPokemonId = evolutions.chain.evolves_to[0].evolves_to[0].species.url.split('/')[6];
+        return `
+            <div class="evolution-step">
+                <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdPokemonId}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
+                <p class="evo-name">${evolutions.chain.evolves_to[0].evolves_to[0].species.name}</p>
+            </div>`;
+    }
+    return "";
+}
+
+function checkForEvolutionAndRender(evolutionHTML, evolutions) {
+    if (evolutionHTML === "<div class='evolution-container'></div>") {
+        document.getElementById('modalContent').innerHTML = "<p>There is no evolution for this Pokemon</p>";
+    } else {
+        document.getElementById('modalContent').innerHTML = evolutionHTML;
+    }
+}
+
 function renderPokeBall() {
     return `
-        <svg class="poke-ball" width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <svg class="poke-ball" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
             <mask id="cutout">
-                <rect width="300" height="300" fill="white" />
-                <circle cx="150" cy="150" r="40" fill="black" />
+                <rect width="200" height="200" fill="white" />
+                <circle cx="100" cy="100" r="36" fill="black" />
             </mask>
-            <path d="M150,45 A105,105 0 0,1 255,150 H45 A105,105 0 0,1 150,45 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
-            <path d="M45,165 H255 A105,105 0 0,1 150,255 A105,105 0 0,1 45,165 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
-            <circle cx="150" cy="150" r="26" fill="black" opacity="0.5" />
+            <path d="M100,10 A90,90 0 0,1 190,100 H10 A90,90 0 0,1 100,10 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
+            <path d="M10,115 H190 A90,90 0 0,1 100,190 A90,90 0 0,1 10,115 Z" fill="black" opacity="0.5" mask="url(#cutout)" />
+            <circle cx="100" cy="100" r="24" fill="black" opacity="0.5" />
         </svg>`
 }
 

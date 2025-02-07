@@ -105,11 +105,10 @@ main {
     position: absolute;
     top: 52%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 300px;
+    transform: translate(-50%, -50%) scale(1.8);
     opacity: 0.2;
     z-index: 0;
-    filter: blur(3px);
+    filter: blur(2px);
 }
 
 .pokemon-card:hover {
@@ -245,21 +244,30 @@ main {
     margin: -10px 10px 0 10px;
 }
 
-.attribute-bar::after {
+.loader {
     position: absolute;
-    content: '';
-    height: 10px;
-    top: 0;
-    left: 0;
-    flex: 1;
-    width: 200px; /* to be adjusted with media query */
-    background: rgba(0, 0, 0, 0.1);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 5px;
+    background: #ddd;
+    overflow: hidden;
     border-radius: 5px;
 }
 
-.stat-bar {
-    height: 20px;
-    background-color: blue;
+.loader::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 100%;
+    background: #ff4141;
+    animation: loading 1s forwards linear;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
 }
 
 .types {

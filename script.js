@@ -209,7 +209,6 @@ async function fetchEvolutionChain(pokemonId) {
 
 function formatAttribute(number) {
     let numberStr = number.toString();
-    
     if (number >= 10) {
         return numberStr.slice(0, -1) + ',' + numberStr.slice(-1);
     } else {
