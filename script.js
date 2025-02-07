@@ -14,11 +14,11 @@ const nextPokemonButton = document.getElementById("nextPok");
 const prevPokemonButton = document.getElementById("prevPok");
 
 async function init() {
-    document.getElementById("spinner").classList.remove("hidden");
+    showSpinner();
     await fetchPokemonData(30, 0);
     await getPokemonInfos(allPokemonData);
     renderPokemonCards(0);
-    document.getElementById("spinner").classList.add("hidden");
+    hideSpinner();
 }
 
 async function fetchPokemonData(limit, offset) {
@@ -111,21 +111,30 @@ window.addEventListener("scroll", async () => {
 async function loadMorePokemon() {
     if (loading || allPokemonData.length >= 1000) return;
     loading = true;
-    disableScroll();
-    document.getElementById("spinner").classList.remove("hidden");
+
+    showSpinner();
     await fetchPokemonData(30, currentShownPokemon);
     await getPokemonInfos(allPokemonData.slice(currentShownPokemon, currentShownPokemon + 30));
     renderDelayedCards();
     loading = false;
 }
 
-function renderDelayedCards() {
+function showSpinner() {
+    disableScroll();
+    document.getElementById("spinner").classList.remove("hidden");
+}
+
+function hideSpinner() {
     setTimeout(() => {
+    document.getElementById("spinner").classList.add("hidden");
+    enableScroll();
+}, 400);
+}
+
+function renderDelayedCards() {
         renderPokemonCards(currentShownPokemon);
         currentShownPokemon += 30;
-        document.getElementById("spinner").classList.add("hidden");
-        enableScroll();
-    }, 400);
+        hideSpinner()
 }
 
 function disableScroll() {
@@ -196,4 +205,18 @@ async function fetchEvolutionChain(pokemonId) {
         console.error("Error while loading Poke API", error);
         return null;
     }
+}
+
+function formatAttribute(number) {
+    let numberStr = number.toString();
+    
+    if (number >= 10) {
+        return numberStr.slice(0, -1) + ',' + numberStr.slice(-1);
+    } else {
+        return '0,' + numberStr;
+    }
+}
+
+function formatPokemonId(id) {
+    return id.toString().padStart(4, '0');
 }
