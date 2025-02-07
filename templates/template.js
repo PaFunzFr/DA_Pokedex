@@ -33,7 +33,8 @@ function renderModal(index) {
                 <div class="modal-img-container">
                     <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
                 </div>
-                <img class="poke-cry" onclick="playCry(${index})" src="../assets/img/03_general/play_sound.png">
+                <div class="close-modal-btn" onclick="closeModalBtn()">close</div>
+                <img class="poke-cry" onclick="playCry(${index})" src="./assets/img/03_general/play_sound.png">
                 <p class="poke-index">#${formatPokemonId(allPokemonInfos[index].id)}</p>
                 <div id="general-properties">
                 <div class="modal-infos">
@@ -80,7 +81,6 @@ function showAttributes(index) {
                     ticks: {
                         font: { size: 12, family: 'Arial', weight: 'bold', align: 'left' },
                         color: '#333',
-                        align: 'left'
                     }
                 }
             },
@@ -119,9 +119,55 @@ function showGeneralStats(index) {
             <h3 class="attribute-title">Types:</h3>
             <p>${allPokemonInfos[index].types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
         </li>
+        <li>
+            <h3 class="attribute-title">Gender:</h3>
+            <p class="gender">${getGenderRate(index)}</p>
+        </li>
     </ul>
     `;
 }
+
+function getGenderRate(index) {
+    let genderRate = allPokemonSpecies[index].gender_rate;
+    const maleSymbol = `<img class="female" src="./assets/img/03_general/male.svg">`;
+    const femaleSymbol = `<img class="male" src="./assets/img/03_general/female.svg">`;
+    let genderText;
+
+    switch (genderRate) {
+        case 0:
+            genderText = `100% ${maleSymbol}`;
+            break;
+        case 1:
+            genderText = `87,5% ${maleSymbol} | 12,5% ${femaleSymbol}`;
+            break;
+        case 2:
+            genderText = `75% ${maleSymbol} | 25% ${femaleSymbol}`;
+            break;
+        case 3:
+            genderText = `50% ${maleSymbol} | 50% ${femaleSymbol}`;
+            break;
+        case 4:
+            genderText = `25% ${maleSymbol} | 75% ${femaleSymbol}`;
+            break;
+        case 5:
+            genderText = `12,5% ${maleSymbol} | 87,5% ${femaleSymbol}`;
+            break;
+        case 6:
+            genderText = `100% ${femaleSymbol}`;
+            break;
+        case 7:
+            genderText = "has no gender";
+            break;
+        case 8:
+            genderText = "there is no ratio";
+            break;
+        default:
+            genderText = "no gender";
+            break;
+    }
+    return genderText;
+}
+
 
 async function showEvolutionChain(index) {
     try {
@@ -148,7 +194,7 @@ function renderFirstEvolution(evolutions) {
             <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
             <p class="evo-name">${formattingFirstLetter(evolutions.chain.species.name)}</p>
         </div>
-        <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">`;
+        <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">`;
 }
 
 function renderSecondEvolution(evolutions) {
@@ -167,7 +213,7 @@ function renderThirdEvolution(evolutions) {
     if (evolutions.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.url) {
         const thirdPokemonId = evolutions.chain.evolves_to[0].evolves_to[0].species.url.split('/')[6];
         return `
-        <img src="../assets/img/03_general/arrow2.png" class="evo-arrow">
+        <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">
             <div class="evolution-step">
                 <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdPokemonId}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
                 <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].evolves_to[0].species.name)}</p>

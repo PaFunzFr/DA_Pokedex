@@ -200,7 +200,6 @@ async function fetchEvolutionChain(pokemonId) {
             console.error("no evolution existing");
             return null;
         }
-        
         return responseAsJson;
     } catch (error) {
         console.error("Error while loading Poke API", error);
@@ -257,4 +256,8 @@ function closeModal(event) {
         pokemonDetailModal.style.display = "none";
         enableScroll();
     }
+}
+
+function closeModalBtn() {
+    pokemonDetailModal.style.display = "none";
 }
