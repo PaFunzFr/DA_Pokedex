@@ -8,8 +8,11 @@ function renderPokemonCards(offset) {
         card.classList.add(`${isPokemonLegendary(i)}`);
         card.dataset.name = pokemon.name;
         card.innerHTML += `
-            <h2 class="${isPokemonLegendaryTitle(i)}">${formattingFirstLetter(pokemon.name)}</h2>
-            <p>#${pokemon.id}</p>
+            <div class="card-title-id">
+                <h2 class="${isPokemonLegendaryTitle(i)}">${formattingFirstLetter(pokemon.name)}</h2>
+                <p class="card-id">#${pokemon.id}</p>
+            </div>
+            <h3 class="ger-sub-title">${names_de[i]}</h3>
             <img class="main-pic" src="${imgSrc}" alt="${pokemon.name}">
             <img class="poke-ball" src="../assets/img/03_general/pokeball.svg">
             <div class="types">${pokemon.types.map(types => `<div class="type-info ${types.type.name}">${types.type.name}</div>`).join("")}</div>
@@ -27,9 +30,10 @@ function renderModal(index) {
             <div id="pokemonDetails">
                 <div class="title-container">
                     <div onclick="prevPok(${index})" id="prevPok"><</div>
-                    <h2 class="${isPokemonLegendaryTitle(index)}">${formattingFirstLetter(allPokemonInfos[index].name)}</h2>
+                    <h2 class="${isPokemonLegendaryTitle(index)}">${formattingFirstLetter(allPokemonData[index].name)}</h2>
                     <div onclick="nextPok(${index})" id="nextPok">></div>
                 </div>
+                <h3 class="ger-sub-title">${names_de[index]}</h3>
                 <div class="modal-img-container">
                     <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
                 </div>

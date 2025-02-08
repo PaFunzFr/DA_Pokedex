@@ -4,6 +4,7 @@ let selectedPokemon = null;
 let allPokemonInfos = [];
 let allPokemonSpecies = [];
 let loading = false;
+const allPokemonToLoad = 1025;
 
 const pokemonContainer = document.getElementById("pokemonContainer");
 const loadButton = document.getElementById("loadButton");
@@ -27,7 +28,7 @@ async function fetchPokemonData(limit, offset) {
         const getPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
         const pokemonData = await getPokemon.json();
         pokemonData.results.forEach(pokemon => {
-            pushIfLimitIsntReached(1000, pokemon);
+            pushIfLimitIsntReached(allPokemonToLoad, pokemon);
         });
     } catch (error) {
         console.error("Error while loading Poke API", error);
@@ -110,7 +111,7 @@ window.addEventListener("scroll", async () => {
 });
 
 async function loadMorePokemon() {
-    if (loading || allPokemonData.length >= 1000) return;
+    if (loading || allPokemonData.length >= allPokemonToLoad) return;
     loading = true;
     showSpinner();
     await fetchPokemonData(30, currentShownPokemon);
@@ -260,4 +261,9 @@ function closeModal(event) {
 
 function closeModalBtn() {
     pokemonDetailModal.style.display = "none";
+}
+
+function translatePokemonName(index) {
+        let name = allPokemonData[index].name;
+        newName = names_de[index];
 }

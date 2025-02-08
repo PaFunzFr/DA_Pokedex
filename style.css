@@ -23,8 +23,13 @@ h1 {
 }
 
 h2 {
-    font-size: 36px;
-    margin: 5px 0;
+    font-size: 34px;
+    margin: 5px 0 0 0;
+}
+
+h3 {
+    margin: 0;
+    font-size: 14px;
 }
 
 p {
@@ -55,6 +60,7 @@ header {
 }
 
 main {
+    display: flex;
     flex: 1;
     margin-top: 80px;
 }
@@ -90,6 +96,15 @@ main {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
+}
+.card-title-id {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-id {
+    font-family: 'Bubblegum Sans';
 }
 
 .main-pic {
@@ -271,7 +286,7 @@ main {
 }
 
 .stats-chart {
-    height: 220px; /* media queries 190px or less */
+    height: 220px;
     margin: -10px 10px 0 10px;
 }
 
@@ -303,6 +318,8 @@ main {
 
 .types {
     display: flex;
+    position: absolute;
+    bottom: 10px;
     gap: 10px;
 }
 
@@ -375,44 +392,48 @@ main {
 
 /* LEGENDARY ANIMATIONS */
 .legendary {
+    --shadow1: 2px;
+    --shadow2: 6px;
+    --shadow3: 5px;
     position: relative;
     border: 3px solid rgb(131, 113, 13);
     animation: shimmer 5s infinite linear;
-    filter: drop-shadow(0 0 2px gold) drop-shadow(0 0 6px yellow) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+    filter: drop-shadow(0 0 var(--shadow1) gold) drop-shadow(0 0 var(--shadow2) yellow) drop-shadow(0 0 var(--shadow3) rgba(255, 71, 84, 0.97));
 }
 
 @keyframes shimmer {
     0% { 
         border-color: gold; 
-        filter: drop-shadow(0 0 2px gold) drop-shadow(0 0 6px yellow) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+        filter: drop-shadow(0 0 var(--shadow1) gold) drop-shadow(0 0 var(--shadow2) yellow) drop-shadow(0 0 var(--shadow3) rgba(255, 71, 84, 0.97));
     }
     25% { 
         border-color: rgba(255, 71, 84, 0.97);
-        filter: drop-shadow(0 0 2px rgba(255, 71, 84, 0.97)) drop-shadow(0 0 6px rgb(255, 94, 2)) drop-shadow(0 0 5px yellow);
+        filter: drop-shadow(0 0 var(--shadow1) rgba(255, 71, 84, 0.97)) drop-shadow(0 0 var(--shadow2) rgb(255, 94, 2)) drop-shadow(0 0 var(--shadow3) yellow);
     }
     50% { 
         border-color: yellow;
-        filter: drop-shadow(0 0 2px yellow) drop-shadow(0 0 6px gold) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+        filter: drop-shadow(0 0 var(--shadow1) yellow) drop-shadow(0 0 var(--shadow2) gold) drop-shadow(0 0 var(--shadow3) rgba(255, 71, 84, 0.97));
     }
     75% { 
         border-color: rgb(255, 94, 2);
-        filter: drop-shadow(0 0 2px rgb(255, 94, 2)) drop-shadow(0 0 6px rgba(255, 71, 84, 0.97)) drop-shadow(0 0 5px gold);
+        filter: drop-shadow(0 0 var(--shadow1) rgb(255, 94, 2)) drop-shadow(0 0 var(--shadow2) rgba(255, 71, 84, 0.97)) drop-shadow(0 0 var(--shadow3) gold);
     }
     100% { 
         border-color: gold;  
-        filter: drop-shadow(0 0 2px gold) drop-shadow(0 0 6px yellow) drop-shadow(0 0 5px rgba(255, 71, 84, 0.97));
+        filter: drop-shadow(0 0 var(--shadow1) gold) drop-shadow(0 0 var(--shadow2) yellow) drop-shadow(0 0 var(--shadow3) rgba(255, 71, 84, 0.97));
     }
 }
 
+
 .legendary-name {
     font-weight: bold;
-    background: linear-gradient(90deg, #ffd700, #ffb274, #ffd700);
+    background: linear-gradient(90deg, #ffffff, #dfba33, #ffffff);
+    filter: drop-shadow(0 0 1px black);
     background-size: 200% 100%;
-    filter: drop-shadow(0 0 1px white);
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-    animation: shimmerTitle 5s infinite linear;
+    animation: shimmerTitle 12s infinite linear;
 }
 
 @keyframes shimmerTitle {
@@ -524,6 +545,58 @@ main {
 }
 
 /* media queries */
+@media screen and (max-width: 580px) {
+    .pokemon-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        padding: 2px;
+    }
+
+    .pokemon-card {
+        display: flex;
+        flex-direction: column;
+        width: 47%;
+        height: auto;
+        margin: 0px;
+        padding: 10px;
+    }
+
+    .poke-ball {
+        width: 85%;
+        max-height: 90%;
+    }
+
+    .pokemon-card h2 {
+        font-size: 30px;
+        margin: 0;
+    }
+
+    .type-info {
+        font-size: 12px;
+        padding: 2px 7px;
+    }
+
+    .types {
+        gap: 6px;
+    }
+
+    .main-pic {
+        margin: 0 auto;
+        object-fit: contain;
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .legendary {
+        --shadow1: 1px;
+        --shadow2: 2px;
+        --shadow3: 1px;
+        border: 2px solid rgb(131, 113, 13);
+    }
+}
+
 @media screen and (max-width:400px) and (max-height: 700px) {
     .close-modal-btn {
         display: block;
@@ -560,5 +633,20 @@ main {
     .evolution-container {
         margin-top: 60px;
     }
+}
 
+@media screen and (max-width: 460px) {
+    .pokemon-card h2 {
+        font-size: 20px;
+        font-weight: 200;
+    }
+    
+    .pokemon-card p {
+        font-size: 14px;
+        margin-top: 2px;
+    }
+    h3 {
+        margin: 2px 0;
+        font-size: 12px;
+    }
 }
