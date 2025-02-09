@@ -37,7 +37,7 @@ function renderModal(index) {
                 <div class="modal-img-container">
                     <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
                 </div>
-                <div class="close-modal-btn" onclick="closeModalBtn()">close</div>
+                <div class="close-modal-btn" onclick="closeModalBtn()">x</div>
                 <img class="poke-cry" onclick="playCry(${index})" src="./assets/img/03_general/play_sound.png">
                 <p class="poke-index">#${formatPokemonId(allPokemonInfos[index].id)}</p>
                 <div id="general-properties">

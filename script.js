@@ -261,9 +261,5 @@ function closeModal(event) {
 
 function closeModalBtn() {
     pokemonDetailModal.style.display = "none";
-}
-
-function translatePokemonName(index) {
-        let name = allPokemonData[index].name;
-        newName = names_de[index];
+    enableScroll();
 }

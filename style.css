@@ -163,7 +163,7 @@ main {
 
 .modal-img {
     height: 280px;
-    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.945));
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.945));
 }
 
 .modal-img-container {
@@ -177,21 +177,31 @@ main {
     display: none;
     position: absolute;
     font-family: 'Bubblegum Sans';
-    bottom: 15px;
-    width: 80px;
+    bottom: 300px;
     left: 50%;
     transform: translateX(-50%);
-    border-radius: 10px;
+    border-radius: 50%;
     font-size: 20px;
-    padding: 2px 0;
+    height: 24px;
+    width: 24px;
+    padding: 2px;
     background-color: rgba(0, 0, 0, 0.418);
     color: white;
     z-index: 5;
+    transition: all 0.3s ease;
+}
+
+.close-modal-btn:hover {
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    bottom: 298px;
+    font-size: 22px;
 }
 
 .poke-cry {
     position: absolute;
-    bottom: 300px;
+    bottom: 295px;
     right: 15px;
     width: 40px;
     opacity: 0.4;
@@ -620,6 +630,10 @@ main {
         height: 100%;
     }
 
+    .modal-infos {
+        border-radius: 12px 12px 0 0;
+    }
+
     #general-properties {
         position: absolute;
         bottom: 0;
@@ -636,6 +650,10 @@ main {
 }
 
 @media screen and (max-width: 460px) {
+    .close-modal-btn {
+        display: block;
+    }
+
     .pokemon-card h2 {
         font-size: 20px;
         font-weight: 200;

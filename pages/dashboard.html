@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokedex</title>
+    <link rel="shortcut icon" type="image/svg" href="./assets/img/00_favicon/pokeball.svg">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../styles/style_type_colors.css">
+    <link rel="stylesheet" href="../styles/style_variables.css">
+    <link rel="stylesheet" href="../styles/fonts.css">
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="">
+    <header>
+        <div class="header-container max-width">
+            <h1><a href="../index.html">POKEDEX</a></h1>
+            <div class="search-container" id="searchContainer">
+                <a href="./dashboard.html"  id="toPokeDash">PokeDash</a>
+                <input type="text" class="search-bar" id="searchBar" placeholder="Suche nach Pokémon...">
+                <button class="filter-btn" id="filterButton" onclick="">Filter</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="dashboards-container">
+            <div class="dash-container-group">
+                <div class="type-chart">
+                    <h2>Pokemon by Types</h2>
+                    <canvas id="pokemonByPrimaryType">
+                </div>
+                <div class="type-chart">
+                    <h2>Pokemon by Types</h2>
+                    <canvas id="pokemonLineChart">
+                </div>
+            </div>
+            <div class="dash-container-group">
+                <div class="type-chart">
+                    <h2>Pokemon by Types</h2>
+                    <canvas id="pokemonChartLightest" class="bar-chart">
+                </div>
+                <div class="type-chart">
+                    <h2>Pokemon by Types</h2>
+                    <canvas id="pokemonBySizeSmall" class="bar-chart">
+                </div>
+            </div>
+            <div class="dash-container-group">
+                <div class="type-chart">
+                    <h2>Pokemon by Types</h2>
+                    <canvas id="pokemonChartHeaviest" class="bar-chart">
+                </div>
+                <div class="type-chart">
+                    <h2>Pokemon by Types</h2>
+                    <canvas id="pokemonBySizeBig" class="bar-chart">
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
+    </footer>
+
+
+</body>
+    <script src="../templates/charts.js"></script>
+    <script src="../templates/template.js"></script>
+
+    
+
+</html>
