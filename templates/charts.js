@@ -26,7 +26,7 @@ const pokemonChartlightest = new Chart(chartLightest, {
     data: {
         labels: ['Gastly', 'Haunter', 'Flabebe', 'Cosmog', 'Kartana', 'Gimmighoul', 'Cutiefly', 'Sinistea', 'Rotom', 'Uxie'],
         datasets: [{
-            label: 'Höhe in Metern',
+            label: 'weight in kg',
             data: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.3, 0.3, 0.3],
             backgroundColor: [
                 typeColors['ghost'], // Gastly
@@ -49,10 +49,19 @@ const pokemonChartlightest = new Chart(chartLightest, {
         maintainAspectRatio: false, 
         indexAxis: 'y',
         scales: {
+            y: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: "#ffffff",
+                }
+            },
             x: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 0.1
+                    color: "#ffffff",
+                    stepSize: 0.05
                 }
             }
         },
@@ -66,7 +75,7 @@ const pokemonChartlightest = new Chart(chartLightest, {
                             'ghost', 'ghost', 'fairy', 'psychic', 'grass', 'ghost', 'bug', 'ghost', 'electric', 'psychic'
                         ];
                         const pokemonType = pokemonTypes[typeIndex];
-                        return 'type: (' + pokemonType + ') | height: ' + tooltipItem.raw + ' m';
+                        return 'type: (' + pokemonType + ') | weight: ' + tooltipItem.raw + ' kg';
                     }
                 }
             },
@@ -90,7 +99,7 @@ const pokemonChartHeaviest = new Chart(chartHeaviest, {
     data: {
         labels: ['Celesteela', 'Cosmoem', 'Eternatus', 'Groudon', 'Mudsdale', 'Guzzlord', 'Dialga', 'Stakataka', 'Glastrier', 'Melmetal'],
         datasets: [{
-            label: 'Höhe in Metern',
+            label: 'weight in kg',
             data: [999.9, 999.9, 950, 950, 920, 888, 848.7, 820, 800, 800],
             backgroundColor: [
                 typeColors['steel'], // Celesteela
@@ -112,20 +121,41 @@ const pokemonChartHeaviest = new Chart(chartHeaviest, {
         maintainAspectRatio: false, 
         indexAxis: 'y',
         scales: {
+            y: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: "#ffffff",
+                }
+            },
             x: {
                 beginAtZero: true,
                 ticks: {
+                    color: "#ffffff",
                     stepSize: 100
                 }
             }
         },
         plugins: {
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const typeIndex = tooltipItem.dataIndex;
+                        const pokemonTypes = [
+                            'steel', 'psychic', 'poison', 'ground', 'ground', 'dark', 'steel', 'rock', 'ice', 'steel'
+                        ];
+                        const pokemonType = pokemonTypes[typeIndex];
+                        return 'type: (' + pokemonType + ') | weight: ' + tooltipItem.raw + ' kg';
+                    }
+                }
+            },
             legend: {
                 display: false
             }
         }
     },
-    
 });
 
 
@@ -136,7 +166,7 @@ const pokemonChartSmallest = new Chart(chartSmallest, {
     data: {
         labels: ['Joltik', 'Flabebe', 'Cutiefly', 'Comfey', 'Cosmoem', 'Sinistea', 'Poltchageist', 'Diglett', 'Natu', 'Azurill'],
         datasets: [{
-            label: 'Höhe in Metern',
+            label: 'height in m',
             data: [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.2, 0.2, 0.2],
             backgroundColor: [
                 typeColors['bug'], // Joltik
@@ -160,10 +190,14 @@ const pokemonChartSmallest = new Chart(chartSmallest, {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 0.1
+                    color: "#ffffff",
+                    stepSize: 0.05
                 }
             },
             x: {
+                grid: {
+                    display: false
+                },
                 ticks: {
                     color: "#ffffff",
                     font: {
@@ -187,21 +221,21 @@ const ctx = document.getElementById('pokemonBySizeBig').getContext('2d');
 const pokemonChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Eternatus', 'Wailord', 'Dondozo', 'Celesteela', 'Steelix', 'Onix', 'Rayquaza', 'Gyrados', 'Milotic', 'Yveltal'],
+        labels: ['Eternatus', 'Wailord', 'Dondozo', 'Celesteela', 'Steelix', 'Onix', 'Rayquaza', 'Gyarados', 'Milotic', 'Yveltal'],
         datasets: [{
-            label: 'Höhe in Metern',
+            label: 'height in m',
             data: [20, 14.5, 12, 9.2, 9.2, 8.8, 7, 6.5, 6.2, 5.8],
             backgroundColor: [
-                typeColors['bug'], // Eternatus
-                typeColors['fairy'], // Wailord
-                typeColors['bug'], // Dondozo
-                typeColors['fairy'], // Celesteela
-                typeColors['psychic'], // Steelix
-                typeColors['ghost'], // Onix
-                typeColors['grass'], // Rayquaza
-                typeColors['ground'], // Gyrados
-                typeColors['psychic'], // Milotic
-                typeColors['normal'] // Yveltal
+                typeColors['poison'], // Eternatus
+                typeColors['water'], // Wailord
+                typeColors['water'], // Dondozo
+                typeColors['steel'], // Celesteela
+                typeColors['steel'], // Steelix
+                typeColors['rock'], // Onix
+                typeColors['dragon'], // Rayquaza
+                typeColors['water'], // Gyarados
+                typeColors['water'], // Milotic
+                typeColors['dark'] // Yveltal
             ],
             borderWidth: 0
         }]
@@ -213,9 +247,22 @@ const pokemonChart = new Chart(ctx, {
             y: {
                 beginAtZero: true,
                 ticks: {
-                    stepSize: 1
+                    color: "#ffffff",
+                    stepSize: 5
                 }
-            }
+            },
+            x: {
+                grid: {
+                    display: false
+                },
+                ticks: {
+                    color: "#ffffff",
+                    font: {
+                        size: 14
+                    },
+                    maxRotation: 45,
+                    autoSkip: false
+            }},
         },
         plugins: {
             legend: {
@@ -236,7 +283,7 @@ new Chart(primaryTypeContainer, {
             "Ghost", "Dragon", "Dark", "Steel", "Fairy"
         ],
         datasets: [{
-            label: "Pokémon of this type:",
+            label: "Pokémon by type",
             data: [136, 80, 157, 92, 115, 43, 57, 51, 47, 13, 83, 93, 81, 51, 52, 59, 49, 33],
             backgroundColor: [
                 "#A8A77A", "#EE8130", "#6390F0", "#F7D02C", "#7AC74C", "#96D9D6",
@@ -249,7 +296,7 @@ new Chart(primaryTypeContainer, {
     },
     options: {
         responsive: true,
-        maintainAspectRatio: false, 
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 position: 'bottom',
@@ -274,7 +321,7 @@ const pokemonLineChart = new Chart(ctx5, {
     data: {
         labels: ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Ext. Sinnoh', 'Upd. Johto', 'Unova', 'Upd. Unova', 'Conquest', 'Kalos-Central', 'Kalos-Coastal', 'Kalos-Mountain', 'Upd. Hoenn', 'Alola', 'Melemele', 'Akala', 'Ulaula', 'Poni', 'Upd. Ulaula'],
         datasets: [{
-            label: 'Anzahl Pokémon',
+            label: 'Count',
             data: [151, 251, 202, 151, 210, 256, 156, 301, 200, 150, 153, 151, 211, 302, 120, 130, 130, 100, 403],
             fill: false,
             borderWidth: 3,  
@@ -289,10 +336,13 @@ const pokemonLineChart = new Chart(ctx5, {
         maintainAspectRatio: false,  
         scales: {
             x: {
+                grid: {
+                    display: false
+                },
                 ticks: {
                     color: "#ffffff",
                     font: {
-                        size: 14 
+                        size: 12 
                     },
                     maxRotation: 45, 
                     autoSkip: false 
@@ -304,11 +354,11 @@ const pokemonLineChart = new Chart(ctx5, {
                     color: "#ffffff",
                     stepSize: 50,
                     font: {
-                        size: 10
+                        size: 12
                     }
                 },
                 grid: {
-                    display: false
+                    display: true,
                 }
             }
         },

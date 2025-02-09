@@ -195,7 +195,7 @@ function renderFirstEvolution(evolutions) {
     const firstPokemonId = evolutions.chain.species.url.split('/')[6];
     return `
         <div class="evolution-step">
-            <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
+            <img onclick="playCry(${parseFloat(firstPokemonId) - 1})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
             <p class="evo-name">${formattingFirstLetter(evolutions.chain.species.name)}</p>
         </div>
         <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">`;
@@ -206,7 +206,7 @@ function renderSecondEvolution(evolutions) {
         const secondPokemonId = evolutions.chain.evolves_to[0].species.url.split('/')[6];
         return `
             <div class="evolution-step">
-                <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
+                <img onclick="playCry(${parseFloat(secondPokemonId) - 1})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
                 <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].species.name)}</p>
             </div>`;
     }
@@ -219,7 +219,7 @@ function renderThirdEvolution(evolutions) {
         return `
         <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">
             <div class="evolution-step">
-                <img class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${thirdPokemonId}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
+                <img onclick="playCry(${parseFloat(thirdPokemonId) - 1})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${parseFloat(thirdPokemonId)}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
                 <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].evolves_to[0].species.name)}</p>
             </div>`;
     }
@@ -227,7 +227,7 @@ function renderThirdEvolution(evolutions) {
 }
 
 
-function checkForEvolutionAndRender(evolutionHTML, evolutions) {
+function checkForEvolutionAndRender(evolutionHTML) {
     if (evolutionHTML === "<div class='evolution-container'></div>") {
         document.getElementById('modalContent').innerHTML = "<p>There is no evolution for this Pokemon</p>";
     } else {

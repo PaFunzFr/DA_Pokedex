@@ -32,6 +32,11 @@ h3 {
     font-size: 14px;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
 p {
     margin: 0;
 }
@@ -379,6 +384,13 @@ main {
     width: 90px;
     flex: 1;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.704));
+    transition: all 0.3s ease;
+}
+
+.evo-img:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.9));
+    transform: scale(1.02);
 }
 
 .evo-name {
