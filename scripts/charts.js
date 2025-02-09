@@ -208,6 +208,19 @@ const pokemonChartSmallest = new Chart(chartSmallest, {
             }},
         },
         plugins: {
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const typeIndex = tooltipItem.dataIndex;
+                        const pokemonTypes = [
+                            'bug', 'fairy', 'bugy', 'fairy', 'psychic', 'ghost', 'grass', 'ground', 'psychic', 'normal'
+                        ];
+                        const pokemonType = pokemonTypes[typeIndex];
+                        return 'type: (' + pokemonType + ') | size: ' + tooltipItem.raw + ' m';
+                    }
+                }
+            },
             legend: {
                 display: false
             }
@@ -265,6 +278,19 @@ const pokemonChart = new Chart(ctx, {
             }},
         },
         plugins: {
+            tooltip: {
+                enabled: true,
+                callbacks: {
+                    label: function(tooltipItem) {
+                        const typeIndex = tooltipItem.dataIndex;
+                        const pokemonTypes = [
+                            'poison', 'water', 'water', 'steel', 'steel', 'rock', 'dragon', 'water', 'water', 'dark'
+                        ];
+                        const pokemonType = pokemonTypes[typeIndex];
+                        return 'type: (' + pokemonType + ') | size: ' + tooltipItem.raw + ' m';
+                    }
+                }
+            },
             legend: {
                 display: false
             }

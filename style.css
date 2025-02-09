@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -27,6 +31,10 @@ h2 {
     margin: 5px 0 0 0;
 }
 
+h2 span {
+    font-size: 20px;
+}
+
 h3 {
     margin: 0;
     font-size: 14px;
@@ -35,6 +43,8 @@ h3 {
 a {
     text-decoration: none;
     color: black;
+    font-family: 'Bubblegum Sans';
+    font-size: 24px;
 }
 
 p {
@@ -47,9 +57,17 @@ header {
     left: 0;
     width: 100%;
     background-color: #ffcc00;
+    padding: 12px 0 5px 0;
     text-align: center;
     filter: drop-shadow(0 24px 10px rgba(0, 0, 0, 0.5));
     z-index: 49;
+}
+
+.header-img {
+    padding: 0;
+    margin: 0;
+    height: 50px;
+    filter: drop-shadow(0 0 2px rgb(27, 31, 52));
 }
 
 .header-container {
@@ -57,6 +75,11 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+}
+
+.search-container {
+    display: flex;
+    gap: 20px;
 }
 
 .max-width {
@@ -73,14 +96,18 @@ main {
 .search-bar {
     padding: 5px;
     font-size: 16px;
+    border-radius: 5px;
+    border: none;
 }
 
 .filter-btn {
     padding: 5px 10px;
-    background-color: #ff6600;
+    background-color: #3366cc;
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 5px;
+    filter: drop-shadow(0 0 2px rgb(27, 31, 52));
 }
 
 .pokemon-container {
@@ -181,14 +208,16 @@ main {
 .close-modal-btn {
     display: none;
     position: absolute;
+    align-items: center;
+    justify-content: center;
     font-family: 'Bubblegum Sans';
     bottom: 300px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 50%;
     font-size: 20px;
-    height: 24px;
-    width: 24px;
+    height: 30px;
+    width: 30px;
     padding: 2px;
     background-color: rgba(0, 0, 0, 0.418);
     color: white;
@@ -198,10 +227,12 @@ main {
 
 .close-modal-btn:hover {
     cursor: pointer;
-    width: 26px;
-    height: 26px;
-    bottom: 298px;
+    width: 34px;
+    height: 34px;
+    bottom: 296px;
     font-size: 22px;
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
 }
 
 .poke-cry {
@@ -619,9 +650,9 @@ main {
     }
 }
 
-@media screen and (max-width:400px) and (max-height: 700px) {
+@media screen and (max-width:400px) and (max-height: 750px) {
     .close-modal-btn {
-        display: block;
+        display: flex;
     }
 
     .pok-detail-content {
@@ -632,7 +663,7 @@ main {
         width: 100%;
         height: 100vh;
         margin: 0;
-        max-height: 700px;
+        max-height: 100%;
     }
 
     #pokemonDetails {
@@ -663,7 +694,7 @@ main {
 
 @media screen and (max-width: 460px) {
     .close-modal-btn {
-        display: block;
+        display: flex;
     }
 
     .pokemon-card h2 {

@@ -13,13 +13,13 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="init();">
-    <header>
+<body id="toTop" onload="init();">
+    <header id="header">
         <div class="header-container max-width">
-            <h1>POKEDEX</h1>
+            <a href="#toTop"><img class="header-img" src="./assets/img/01_header/pokedex.png"></a>
             <div class="search-container" id="searchContainer">
                 <a href="pages/dashboard.html"  id="toPokeDash">PokeDash</a>
-                <input type="text" class="search-bar" id="searchBar" placeholder="Suche nach Pokémon...">
+                <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokemon...">
                 <button class="filter-btn" id="filterButton" onclick="">Filter</button>
             </div>
         </div>
@@ -47,9 +47,7 @@
 
 
 </body>
-    <script src="./templates/de.js"></script>
+    <script src="./data/de.js"></script>
     <script src="./templates/template.js"></script>
     <script src="script.js"></script>
-    
-
 </html>

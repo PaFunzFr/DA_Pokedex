@@ -15,16 +15,17 @@
 </head>
 
 <body onload="">
-    <header>
-        <div class="header-container max-width">
-            <h1><a href="../index.html">POKEDEX</a></h1>
-            <div class="search-container" id="searchContainer">
-                <a href="./dashboard.html"  id="toPokeDash">PokeDash</a>
-                <input type="text" class="search-bar" id="searchBar" placeholder="Suche nach Pokémon...">
-                <button class="filter-btn" id="filterButton" onclick="">Filter</button>
+    <body id="toTop" onload="init();">
+        <header id="header">
+            <div class="header-container max-width">
+                <a href="../index.html"><img class="header-img" src="../assets/img/01_header/pokedex.png"></a>
+                <div class="search-container" id="searchContainer">
+                    <a href=""  id="toPokeDash">PokeDash</a>
+                    <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokemon...">
+                    <button class="filter-btn" id="filterButton" onclick="">Filter</button>
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
 
     <main>
         <div class="dashboards-container">
@@ -40,22 +41,22 @@
             </div>
             <div class="dash-container-group">
                 <div class="type-chart">
-                    <h2>Lightest Pokemon [kg]</h2>
-                    <canvas id="pokemonChartLightest" class="bar-chart">
+                    <h2>Smallest Pokemon <span>[M]</span></h2>
+                    <canvas id="pokemonBySizeSmall" class="bar-chart">
                 </div>
                 <div class="type-chart">
-                    <h2>Heaviest Pokemon [kg]</h2>
-                    <canvas id="pokemonChartHeaviest" class="bar-chart">
+                    <h2>Lightest Pokemon <span>[KG]</span></h2>
+                    <canvas id="pokemonChartLightest" class="bar-chart">
                 </div>
             </div>
             <div class="dash-container-group">
                 <div class="type-chart">
-                    <h2>Smallest Pokemon [m]</h2>
-                    <canvas id="pokemonBySizeSmall" class="bar-chart">
+                    <h2>Biggest Pokemon <span>[M]</span></h2>
+                    <canvas id="pokemonBySizeBig" class="bar-chart">
                 </div>
                 <div class="type-chart">
-                    <h2>Biggest Pokemon [m]</h2>
-                    <canvas id="pokemonBySizeBig" class="bar-chart">
+                    <h2>Heaviest Pokemon <span>[KG]</span></h2>
+                    <canvas id="pokemonChartHeaviest" class="bar-chart">
                 </div>
             </div>
         </div>
@@ -63,12 +64,7 @@
     <footer>
         <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
     </footer>
-
-
 </body>
-    <script src="../templates/charts.js"></script>
+    <script src="../scripts/charts.js"></script>
     <script src="../templates/template.js"></script>
-
-    
-
 </html>
