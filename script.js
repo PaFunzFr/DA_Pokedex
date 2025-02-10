@@ -259,15 +259,6 @@ function formattingFirstLetter(word) {
 }
 
 
-
-async function prevPok() {
-    resetSearch();
-    if (selectedPokemon > 0) { 
-        selectedPokemon--;
-        openModal(selectedPokemon + 1);
-    }
-}
-
 function checkForFirstModalPokemon(index) {
     if (index === 0) {
         document.getElementById('prevPok').innerText = "";
@@ -425,4 +416,43 @@ function checkSpeciesSource(index, whatDataToRender) {
         pokStats = searchedPokemonSpecies[index];
     }
     return pokStats;
+}
+
+// prevPok & nextPok
+function nextPok(event, index) {
+    const whatDataToRender = event.target.id;
+    const renderedFor = whatDataToRender.split("-")[1].replace(/\d+$/, "");
+    let infoSource = getInfoSource(whatDataToRender);
+    let speciesSource= getSpeciesSource(whatDataToRender);
+    renderNextPok(index, infoSource, speciesSource, renderedFor);
+}
+
+function prevPok(event, index) {
+    const whatDataToRender = event.target.id;
+    const renderedFor = whatDataToRender.split("-")[1].replace(/\d+$/, "");
+    let infoSource = getInfoSource(whatDataToRender);
+    let speciesSource= getSpeciesSource(whatDataToRender);
+    renderPrevPok(index, infoSource, speciesSource, renderedFor);
+}
+
+async function renderNextPok(index, infoSource, speciesSource, renderedFor) {
+    console.log();
+    if (index < infoSource.length - 1) {
+        index++;
+        openModal(index, infoSource, speciesSource, renderedFor);
+    } else if (selectedPokemon => infoSource.length -1) {
+        //await loadMorePokemon();
+        index++;
+        openModal(index, infoSource, speciesSource, renderedFor);
+        setTimeout(() => {
+            disableScroll();
+        }, 400);
+    }
+}
+
+async function renderPrevPok(index, infoSource, speciesSource, renderedFor) {
+    if (index > 0) { 
+        index--;
+        openModal(index, infoSource, speciesSource, renderedFor);
+    }
 }

@@ -63,29 +63,6 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
         </div>`;
 }
 
-function nextPok(event, index) {
-    const whatDataToRender = event.target.id;
-    const renderedFor = whatDataToRender.split("-")[1].replace(/\d+$/, "");
-    let infoSource = getInfoSource(whatDataToRender);
-    let speciesSource= getSpeciesSource(whatDataToRender);
-    renderNextPok(index, infoSource, speciesSource, renderedFor);
-}
-
-async function renderNextPok(index, infoSource, speciesSource, renderedFor) {
-    console.log();
-    if (index < infoSource.length - 1) {
-        index++;
-        openModal(index, infoSource, speciesSource, renderedFor);
-    } else if (selectedPokemon => infoSource.length -1) {
-        //await loadMorePokemon();
-        index++;
-        openModal(index, infoSource, speciesSource, renderedFor);
-        setTimeout(() => {
-            disableScroll();
-        }, 400);
-    }
-}
-
 function renderGraphAttributes(arrayInfo) {
     const labels = ["Health", "Attack", "Defense", "Special-Atk", "Special-Def", "Speed"];
     const data = arrayInfo.stats.map(stat => stat.base_stat); 
