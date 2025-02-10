@@ -30,16 +30,18 @@
         <div class="spinner-bottom"></div>
         <div class="spinner-center"></div>
     </div>
-
+    <div id="noResultsMessage">keine POKEMON!!!</div>
     <div class="shadow-top"></div>
-    
+
     <main>
         <div class="pokemon-container" id="pokemonContainer">
             <!-- rendered Pokemon here -->
         </div>
     </main>
     <section class="search-banner">
-        <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokemon...">
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokémon by Name...">
+        <div onclick="resetSearch()" id="resetBtn" class="reset-btn">RESET</div>
+        <img src="./assets/img/03_general/magnifying-glass_white.png" class="search-btn" id="filterButton" onclick="searchAllPokemon()">
         <img src="./assets/img/03_general/filter_white.png" class="filter-btn" id="filterButton" onclick="">
     </section>
 

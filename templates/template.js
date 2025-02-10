@@ -1,22 +1,21 @@
-function renderPokemonCards(offset) {
-    for (let i = offset; i < allPokemonInfos.length; i++) {
-        const pokemon = allPokemonInfos[i];
+function renderPokemonCards(offset, arrayData, arrayInfos, arraySpecies, renderedFor) {
+    for (let i = offset; i < arrayData.length; i++) {
         const card = document.createElement("div");
-        const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+        const imgSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${arrayInfos[i].id}.png`;
         card.classList.add("pokemon-card");
-        card.classList.add(`${pokemon.types[0].type.name}`);
-        card.classList.add(`${isPokemonLegendary(i)}`);
-        card.dataset.name = pokemon.name;
+        card.classList.add(`${arrayInfos[i].types[0].type.name}`);
+        card.classList.add(`${isPokemonLegendary(i, arraySpecies)}`);
+        card.dataset.name = renderedFor;
         card.innerHTML += `
             <div class="card-title-id">
-                <h2 class="${isPokemonLegendaryTitle(i)}">${formattingFirstLetter(pokemon.name)}</h2>
-                <p class="card-id">#${pokemon.id}</p>
+                <h2 class="${isPokemonLegendaryTitle(i, arraySpecies)} pok-title">${formattingFirstLetter(arrayInfos[i].name)}</h2>
+                <p class="card-id">#${arrayInfos[i].id}</p>
             </div>
-            <h3 class="ger-sub-title">${names_de[i]}</h3>
-            <img class="main-pic" src="${imgSrc}" alt="${pokemon.name}">
+            <h3 class="ger-sub-title">${names_de[arrayInfos[i].id -1]}</h3>
+            <img class="main-pic" src="${imgSrc}" alt="${arrayInfos[i].name}">
             <img class="poke-ball" src="../assets/img/03_general/pokeball.svg">
             <div class="types">
-                ${allPokemonInfos[i].types.map(typeInfo => `
+                ${arrayInfos[i].types.map(typeInfo => `
                 <img 
                     class="type-icon ${typeInfo.type.name}" 
                     title="${typeInfo.type.name}"
@@ -27,47 +26,59 @@ function renderPokemonCards(offset) {
             </div>
         `;
         card.addEventListener("click", () => {
-            openModal(pokemon.id);
+            openModal(i, arrayData, arrayInfos, arraySpecies, renderedFor);
         });
         pokemonContainer.appendChild(card);
     }
 }
 
-function renderModal(index) {
+function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
     return pokemonDetailModal.innerHTML = `
-        <div class="pok-detail-content ${isPokemonLegendary(index)} ${allPokemonInfos[index].types[0].type.name}" id="pokemonDetailContent">
-            <div id="pokemonDetails">
+        <div class="pok-detail-content ${isPokemonLegendary(index, arraySpecies)} ${arrayInfos[index].types[0].type.name}" id="pokemonDetailContent">
+            <div id="pokemonDetails${index}">
                 <div class="title-container">
                     <div onclick="prevPok(${index})" id="prevPok"><</div>
-                    <h2 class="${isPokemonLegendaryTitle(index)}">${formattingFirstLetter(allPokemonData[index].name)}</h2>
+                    <h2 class="${isPokemonLegendaryTitle(index, arraySpecies)}">${formattingFirstLetter(arrayInfos[index].name)}</h2>
                     <div onclick="nextPok(${index})" id="nextPok">></div>
                 </div>
-                <h3 class="ger-sub-title">${names_de[index]}</h3>
+                <h3 class="ger-sub-title">${names_de[arrayInfos[index].id - 1]}</h3>
                 <div class="modal-img-container">
-                    <img class="modal-img"src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${allPokemonInfos[index].id}.png" alt="${allPokemonInfos[index].name}">
+                    <img class="modal-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${arrayInfos[index].id}.png" alt="${arrayInfos[index].id}">
                 </div>
                 <div class="close-modal-btn" onclick="closeModalBtn()">x</div>
                 <img class="poke-cry" onclick="playCry(${index})" src="./assets/img/03_general/play_sound.png">
-                <p class="poke-index">#${formatPokemonId(allPokemonInfos[index].id)}</p>
+                <p class="poke-index">#${formatPokemonId(arrayInfos[index].id)}</p>
                 <div id="general-properties">
-                <div class="modal-infos">
-                    <ul class="modal-categories">
-                        <li onclick="showGeneralStats(${index})">General</li>
-                        <li onclick="showAttributes(${index})">Base Stats</li>
-                        <li onclick="showEvolutionChain(${index})">Evolution</li>
-                        <li onclick="showForms(${index})">Forms</li>
-                    </ul>
-                    <div id="modalContent"></div>
+                    <div class="modal-infos">
+                        <ul class="modal-categories">
+                            <li onclick="showGeneralStats(${index})">General</li>
+                            <li id="attrbiutes-${renderedFor}${index}" onclick="showAttributes(event, ${index})">Base Stats</li>
+                            <li id="evolutions-${renderedFor}${index}" onclick="showEvolutionChain(${index})">Evolution</li>
+                            <li id="forms-${renderedFor}${index}" onclick="showForms(${index})">Forms</li>
+                        </ul>
+                        <div id="modalContent"></div>
+                    </div>
                 </div>
             </div>
         </div>`;
-};
+}
 
-function showAttributes(index) {
-    document.getElementById('modalContent').innerHTML = "";
-    const pokStats = allPokemonInfos[index].stats;
+
+function showAttributes(event, index) {
+    const whatDataToRender = event.target.id;
+    let pokStats;
+    if (whatDataToRender.includes("common")) {
+        pokStats = allPokemonInfos[index].stats;
+    } else if (whatDataToRender.includes("searched")) {
+        pokStats = searchedPokemonInfos[index].stats;
+    }
+    renderGraphAttributes(pokStats);
+
+}
+
+function renderGraphAttributes(stats) {
     const labels = ["Health", "Attack", "Defense", "Special-Atk", "Special-Def", "Speed"];
-    const data = pokStats.map(stat => stat.base_stat);
+    const data = stats.map(stat => stat.base_stat); 
     const modalContentHTML = `
         <div id="statsChart" class="stats-chart">
             <canvas id="pokemonChart"></canvas>

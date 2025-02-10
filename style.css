@@ -96,6 +96,7 @@ header {
 .search-banner{
     display: flex;
     position: fixed;
+    align-items: center;
     border-radius: 15px;
     gap: 10px;
     justify-content: space-between;
@@ -112,6 +113,19 @@ header {
     filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.9));
 }
 
+.reset-btn {
+    display: none;
+    align-items: center;
+    font-family: 'Bubblegum Sans';
+    padding: 4px 8px;
+    height: 20px;
+    background-color: #cc33c4;
+    color: white;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+    cursor: pointer;
+}
+
 .search-bar {
     flex: 1;
     padding: 5px;
@@ -120,9 +134,11 @@ header {
     border: none;
 }
 
-.filter-btn {
+.filter-btn,
+.search-btn {
     padding: 8px;
     height: 16px;
+    width: 16px;
     background-color: #3366cc;
     color: white;
     border: none;
@@ -164,15 +180,16 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 20px;
+    padding: 0px;
     max-width: 1440px;
-    margin: 0 auto;
+    margin: 0 auto 80px auto;
 }
 
 .pokemon-card {
     position: relative;
     box-sizing: border-box;
     width: 240px;
+    height: 340px;
     margin: 11px;
     padding: 15px;
     border-radius: 10px;
