@@ -17,10 +17,8 @@
     <header id="header">
         <div class="header-container max-width">
             <a href="#toTop"><img class="header-img" src="./assets/img/01_header/pokedex.png"></a>
-            <div class="search-container" id="searchContainer">
+            <div class="navigation-container">
                 <a href="pages/dashboard.html"  id="toPokeDash">PokeDash</a>
-                <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokemon...">
-                <button class="filter-btn" id="filterButton" onclick="">Filter type</button>
             </div>
         </div>
     </header>
@@ -33,11 +31,20 @@
         <div class="spinner-center"></div>
     </div>
 
+    <div class="shadow-top"></div>
+    
     <main>
         <div class="pokemon-container" id="pokemonContainer">
             <!-- rendered Pokemon here -->
         </div>
     </main>
+    <section class="search-banner">
+        <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokemon...">
+        <img src="./assets/img/03_general/filter_white.png" class="filter-btn" id="filterButton" onclick="">
+    </section>
+
+    <div class="shadow-bottom"></div>
+
     <footer>
         <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
     </footer>

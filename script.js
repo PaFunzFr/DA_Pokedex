@@ -266,3 +266,13 @@ function closeModalBtn() {
     pokemonDetailModal.style.display = "none";
     enableScroll();
 }
+
+window.addEventListener("scroll", () => {
+    let shadow = document.querySelector(".shadow-top");
+    let scrollPosition = window.scrollY;
+    if (scrollPosition > 90) {
+        shadow.style.height = "200px";
+    } else {
+        shadow.style.height = "80px";
+    }
+});
