@@ -26,7 +26,7 @@ function renderPokemonCards(offset, arrayData, arrayInfos, arraySpecies, rendere
             </div>
         `;
         card.addEventListener("click", () => {
-            openModal(i, arrayData, arrayInfos, arraySpecies, renderedFor);
+            openModal(i, arrayInfos, arraySpecies, renderedFor);
         });
         pokemonContainer.appendChild(card);
     }
@@ -37,9 +37,9 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
         <div class="pok-detail-content ${isPokemonLegendary(index, arraySpecies)} ${arrayInfos[index].types[0].type.name}" id="pokemonDetailContent">
             <div id="pokemonDetails${index}">
                 <div class="title-container">
-                    <div onclick="prevPok(${index})" id="prevPok"><</div>
+                    <div id="pre-${renderedFor}${index}" onclick="prevPok(event, ${index})" class="prevPok"><</div>
                     <h2 class="${isPokemonLegendaryTitle(index, arraySpecies)}">${formattingFirstLetter(arrayInfos[index].name)}</h2>
-                    <div onclick="nextPok(${index})" id="nextPok">></div>
+                    <div id="nxt-${renderedFor}${index}" onclick="nextPok(event, ${index})" class="nextPok">></div>
                 </div>
                 <h3 class="ger-sub-title">${names_de[arrayInfos[index].id - 1]}</h3>
                 <div class="modal-img-container">
@@ -61,6 +61,29 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
                 </div>
             </div>
         </div>`;
+}
+
+function nextPok(event, index) {
+    const whatDataToRender = event.target.id;
+    const renderedFor = whatDataToRender.split("-")[1].replace(/\d+$/, "");
+    let infoSource = getInfoSource(whatDataToRender);
+    let speciesSource= getSpeciesSource(whatDataToRender);
+    renderNextPok(index, infoSource, speciesSource, renderedFor);
+}
+
+async function renderNextPok(index, infoSource, speciesSource, renderedFor) {
+    console.log();
+    if (index < infoSource.length - 1) {
+        index++;
+        openModal(index, infoSource, speciesSource, renderedFor);
+    } else if (selectedPokemon => infoSource.length -1) {
+        //await loadMorePokemon();
+        index++;
+        openModal(index, infoSource, speciesSource, renderedFor);
+        setTimeout(() => {
+            disableScroll();
+        }, 400);
+    }
 }
 
 function renderGraphAttributes(arrayInfo) {

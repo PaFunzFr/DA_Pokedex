@@ -173,11 +173,10 @@ function enableScroll() {
     document.body.style.paddingRight = '';
 }
 
-function openModal(pokemonId, arrayData, arrayInfos, arraySpecies, renderedFor) {
+function openModal(pokemonId, arrayInfos, arraySpecies, renderedFor) {
     selectedPokemon = pokemonId;
-    console.log(`du hast Pokemon ${arrayData[0].name} ausgewählt`);
     renderModal(selectedPokemon, arrayInfos, arraySpecies, renderedFor);
-    checkForFirstModalPokemon(selectedPokemon);
+    //checkForFirstModalPokemon(selectedPokemon);
     showStats(pokemonId, renderedFor);
     pokemonDetailModal.style.display ="flex";
     disableScroll();
@@ -205,12 +204,18 @@ async function playCry(index) {
 
 
 function isPokemonLegendary(index, arraySpecies) {
+    if (!arraySpecies || !arraySpecies[index]) {
+        console.error(`Fehler: arraySpecies[${index}] ist undefined.`, arraySpecies);
+        return "common"; // Standardwert, um Absturz zu vermeiden
+    }
+    
     if (arraySpecies[index].is_legendary || arraySpecies[index].is_mythical) {
         return "legendary";
     } else {
         return "common";
     }
 }
+
 
 function isPokemonLegendaryTitle(index, arraySpecies) {
     if (arraySpecies[index].is_legendary || arraySpecies[index].is_mythical) {
@@ -253,20 +258,7 @@ function formattingFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-async function nextPok() {
-    resetSearch();
-    if (selectedPokemon < allPokemonInfos.length - 1) {
-        selectedPokemon++;
-        openModal(selectedPokemon +1);
-    } else if (selectedPokemon => allPokemonInfos.length -1) {
-        await loadMorePokemon();
-        selectedPokemon++;
-        openModal(selectedPokemon +1);
-        setTimeout(() => {
-            disableScroll();
-        }, 400);
-    }
-}
+
 
 async function prevPok() {
     resetSearch();
@@ -401,6 +393,26 @@ function checkInfoSource(index, whatDataToRender) {
         pokStats = allPokemonInfos[index];
     } else if (whatDataToRender.includes("searched")) {
         pokStats = searchedPokemonInfos[index];
+    }
+    return pokStats;
+}
+
+function getInfoSource(whatDataToRender) {
+    let pokStats;
+    if (whatDataToRender.includes("common")) {
+        pokStats = allPokemonInfos;
+    } else if (whatDataToRender.includes("searched")) {
+        pokStats = searchedPokemonInfos;
+    }
+    return pokStats;
+}
+
+function getSpeciesSource(whatDataToRender) {
+    let pokStats;
+    if (whatDataToRender.includes("common")) {
+        pokStats = allPokemonSpecies;
+    } else if (whatDataToRender.includes("searched")) {
+        pokStats = searchedPokemonSpecies;
     }
     return pokStats;
 }

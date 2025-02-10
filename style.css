@@ -494,8 +494,8 @@ main {
     align-items: center;
 }
 
-#nextPok,
-#prevPok {
+.nextPok,
+.prevPok {
     font-family: 'Bubblegum Sans';
     font-size: 38px;
     width: 50px;
