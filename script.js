@@ -30,6 +30,7 @@ async function init() {
     renderPokemonCards(0, allPokemonData, allPokemonInfos, allPokemonSpecies, renderedForData);
     hideSpinner();
     enableScroll();
+    enableLoadOnScroll();
 }
 
 async function fetchPokemonData(limit, offset) {
@@ -78,7 +79,6 @@ function pushDataToArray(results, arrayInfo, arraySpecies) {
     }
 }
 
-
 function extractPokemonId(url) {
     return url.split("/")[6];
 }
@@ -113,7 +113,6 @@ async function fetchPokemonEncounters(pokemonId) {
         console.error("Error while loading Poke API", error);
     }
 }
-
 
 window.addEventListener("scroll", async () => {
     if (!isLoadingEnabled) return; 
@@ -179,7 +178,7 @@ function openModal(pokemonId, arrayData, arrayInfos, arraySpecies, renderedFor) 
     console.log(`du hast Pokemon ${arrayData[0].name} ausgewählt`);
     renderModal(selectedPokemon, arrayInfos, arraySpecies, renderedFor);
     checkForFirstModalPokemon(selectedPokemon);
-    showGeneralStats(selectedPokemon);
+    showStats(pokemonId, renderedFor);
     pokemonDetailModal.style.display ="flex";
     disableScroll();
 }
@@ -221,9 +220,9 @@ function isPokemonLegendaryTitle(index, arraySpecies) {
     }
 }
 
-async function fetchEvolutionChain(pokemonId) {
+async function fetchEvolutionChain(arraySpecies) {
     try {
-        const evolutionUrl = allPokemonSpecies[pokemonId].evolution_chain.url;
+        const evolutionUrl = arraySpecies.evolution_chain.url;
         const response = await fetch(`${evolutionUrl}`);
         const responseAsJson = await response.json();
         if (!responseAsJson || !responseAsJson.chain) {
@@ -308,7 +307,6 @@ window.addEventListener("scroll", () => {
 async function searchAllPokemon() {
     disableLoadOnScroll();
     resetAllSearchArrays ();
-    resetButtton.style.display = "flex";
     isSearching = true;
     const partialName = document.getElementById("searchBar").value.toLowerCase();
     checkSearchInput(partialName);
@@ -343,6 +341,7 @@ function checkSearchInput(input) {
     if (input.length < 3) {
         return;
     }
+    resetButtton.style.display = "flex";
 }
 
 async function fetchSearchedPokemon(partialName) {
@@ -362,4 +361,56 @@ function resetAllSearchArrays () {
     allSearchedCards.forEach(card => {
         card.remove();
     });
+}
+
+//assisting render functions
+function showStats(index, renderedFor) {
+    let infoSource = checkInfoSource(index, renderedFor);
+    let speciesSource = checkSpeciesSource(index, renderedFor);
+    showGeneralStats(infoSource, speciesSource);
+}
+
+function showStatsModal(event, index) {
+    const whatDataToRender = event.target.id;
+    let infoSource = checkInfoSource(index, whatDataToRender);
+    let speciesSource = checkSpeciesSource(index, whatDataToRender);
+    showGeneralStats(infoSource, speciesSource);
+}
+
+function showAttributes(event, index) {
+    const whatDataToRender = event.target.id;
+    let infoSource = checkInfoSource(index, whatDataToRender);
+    renderGraphAttributes(infoSource);
+}
+
+function showEvolutionChain(event, index) {
+    const whatDataToRender = event.target.id;
+    let speciesSource = checkSpeciesSource(index, whatDataToRender);
+    renderEvolutionChain(speciesSource);
+}
+
+function showForms(event, index) {
+    const whatDataToRender = event.target.id;
+    let infoSource = checkInfoSource(index, whatDataToRender);
+    renderForms(infoSource);
+}
+
+function checkInfoSource(index, whatDataToRender) {
+    let pokStats;
+    if (whatDataToRender.includes("common")) {
+        pokStats = allPokemonInfos[index];
+    } else if (whatDataToRender.includes("searched")) {
+        pokStats = searchedPokemonInfos[index];
+    }
+    return pokStats;
+}
+
+function checkSpeciesSource(index, whatDataToRender) {
+    let pokStats;
+    if (whatDataToRender.includes("common")) {
+        pokStats = allPokemonSpecies[index];
+    } else if (whatDataToRender.includes("searched")) {
+        pokStats = searchedPokemonSpecies[index];
+    }
+    return pokStats;
 }

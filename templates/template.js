@@ -51,10 +51,10 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
                 <div id="general-properties">
                     <div class="modal-infos">
                         <ul class="modal-categories">
-                            <li onclick="showGeneralStats(${index})">General</li>
+                            <li id="stats-${renderedFor}${index}" onclick="showStatsModal(event, ${index})">General</li>
                             <li id="attrbiutes-${renderedFor}${index}" onclick="showAttributes(event, ${index})">Base Stats</li>
-                            <li id="evolutions-${renderedFor}${index}" onclick="showEvolutionChain(${index})">Evolution</li>
-                            <li id="forms-${renderedFor}${index}" onclick="showForms(${index})">Forms</li>
+                            <li id="evolutions-${renderedFor}${index}" onclick="showEvolutionChain(event, ${index})">Evolution</li>
+                            <li id="forms-${renderedFor}${index}" onclick="showForms(event, ${index})">Forms</li>
                         </ul>
                         <div id="modalContent"></div>
                     </div>
@@ -63,22 +63,9 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
         </div>`;
 }
 
-
-function showAttributes(event, index) {
-    const whatDataToRender = event.target.id;
-    let pokStats;
-    if (whatDataToRender.includes("common")) {
-        pokStats = allPokemonInfos[index].stats;
-    } else if (whatDataToRender.includes("searched")) {
-        pokStats = searchedPokemonInfos[index].stats;
-    }
-    renderGraphAttributes(pokStats);
-
-}
-
-function renderGraphAttributes(stats) {
+function renderGraphAttributes(arrayInfo) {
     const labels = ["Health", "Attack", "Defense", "Special-Atk", "Special-Def", "Speed"];
-    const data = stats.map(stat => stat.base_stat); 
+    const data = arrayInfo.stats.map(stat => stat.base_stat); 
     const modalContentHTML = `
         <div id="statsChart" class="stats-chart">
             <canvas id="pokemonChart"></canvas>
@@ -120,35 +107,35 @@ function renderGraphAttributes(stats) {
     });
 }
 
-function showGeneralStats(index) {
+function showGeneralStats(infoSource, speciesSource) {
     document.getElementById('modalContent').innerHTML = "";
     document.getElementById('modalContent').innerHTML = `
     <ul class="modal-attributes">
         <li>
             <h3 class="attribute-title">Base XP:</h3>
-            <p>${allPokemonInfos[index].base_experience}</p>
+            <p>${infoSource.base_experience}</p>
         </li>
         <li>
             <h3 class="attribute-title">Height:</h3>
-            <p>${formatAttribute(allPokemonInfos[index].height)} m</p>
+            <p>${formatAttribute(infoSource.height)} m</p>
         </li>
         <li>
             <h3 class="attribute-title">Weight:</h3>
-            <p>${formatAttribute(allPokemonInfos[index].weight)} kg</p>
+            <p>${formatAttribute(infoSource.weight)} kg</p>
         </li>
         <li>
             <h3 class="attribute-title">Habitat:</h3>
-            <p>${allPokemonSpecies[index].habitat?.name ? formattingFirstLetter(allPokemonSpecies[index].habitat.name) : "Not available"}</p>
+            <p>${speciesSource.habitat?.name ? formattingFirstLetter(speciesSource.habitat.name) : "Not available"}</p>
         </li>
         <li>
             <h3 class="attribute-title">Abilities:</h3>
-            <p>${allPokemonInfos[index].abilities.slice(0, 2).map(abilty => formattingFirstLetter(abilty.ability.name)).join(', ')}</p>
+            <p>${infoSource.abilities.slice(0, 2).map(abilty => formattingFirstLetter(abilty.ability.name)).join(', ')}</p>
         </li>
         <li>
             <h3 class="attribute-title">Types:</h3>
             <div class="type-icons-modal-container">
                 <div>
-                    ${allPokemonInfos[index].types.map(typeInfo => `
+                    ${infoSource.types.map(typeInfo => `
                         <p>${typeInfo.type.name}</p>
                         <img 
                             class="type-icon-modal ${typeInfo.type.name}" 
@@ -162,26 +149,26 @@ function showGeneralStats(index) {
         </li>
         <li>
             <h3 class="attribute-title">Gender:</h3>
-            <p class="gender">${getGenderRate(index)}</p>
+            <p class="gender">${getGenderRate(speciesSource)}</p>
         </li>
     </ul>
     `;
 }
 
-function showForms(index) {
+function renderForms(infoSource) {
     document.getElementById('modalContent').innerHTML = "";
     document.getElementById('modalContent').innerHTML = `
     <div class="shiny-form-container">
             <h3 class="form-title">Shiny Form:</h3>
-            <img class="shiny-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${allPokemonInfos[index].id}.png">
-            <img class="shiny-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${allPokemonInfos[index].id}.png">
+            <img class="shiny-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${infoSource.id}.png">
+            <img class="shiny-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${infoSource.id}.png">
     </div>
     `;
 }
 
 
-function getGenderRate(index) {
-    let genderRate = allPokemonSpecies[index].gender_rate;
+function getGenderRate(speciesSource) {
+    let genderRate = speciesSource.gender_rate;
     const maleSymbol = `<img class="female" src="./assets/img/03_general/male.svg">`;
     const femaleSymbol = `<img class="male" src="./assets/img/03_general/female.svg">`;
     let genderText;
@@ -222,9 +209,9 @@ function getGenderRate(index) {
 }
 
 
-async function showEvolutionChain(index) {
+async function renderEvolutionChain(arraySpecies) {
     try {
-        const evolutions = await fetchEvolutionChain(index);
+        const evolutions = await fetchEvolutionChain(arraySpecies);
         let evolutionHTML = "<div class='evolution-container'>";
         evolutionHTML += renderFirstEvolution(evolutions);
         evolutionHTML += renderSecondEvolution(evolutions);
