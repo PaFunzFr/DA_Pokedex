@@ -165,16 +165,19 @@ function calculateBarWidth(value) {
     return (percentage / 100) * maxWidth;
 }
 
-function playCry(index) {
-    let cryUrl = allPokemonInfos[index].cries.latest;
-    if (cryUrl) {
-        let audio = new Audio(cryUrl);
+async function playCry(index) {
+    try {
+        let pokIndex = index + 1;
+        let response = await fetch(`https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokIndex}.ogg`);
+        let audioUrl = URL.createObjectURL(await response.blob());
+        let audio = new Audio(audioUrl);
         audio.volume = 0.5;
         audio.play();
-    } else {
-        console.log("no cry avaliable");
+    } catch (error) {
+        console.log(error.message);
     }
 }
+
 
 function isPokemonLegendary(index) {
     if (allPokemonSpecies[index].is_legendary || allPokemonSpecies[index].is_mythical) {

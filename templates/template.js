@@ -15,7 +15,16 @@ function renderPokemonCards(offset) {
             <h3 class="ger-sub-title">${names_de[i]}</h3>
             <img class="main-pic" src="${imgSrc}" alt="${pokemon.name}">
             <img class="poke-ball" src="../assets/img/03_general/pokeball.svg">
-            <div class="types">${pokemon.types.map(types => `<div class="type-info ${types.type.name}">${types.type.name}</div>`).join("")}</div>
+            <div class="types">
+                ${allPokemonInfos[i].types.map(typeInfo => `
+                <img 
+                    class="type-icon ${typeInfo.type.name}" 
+                    title="${typeInfo.type.name}"
+                    src="./assets/img/04_type_icons/blank/${typeInfo.type.name}.png" 
+                    alt="${typeInfo.type.name}">`
+            ).join("")}
+                
+            </div>
         `;
         card.addEventListener("click", () => {
             openModal(pokemon.id);
@@ -44,8 +53,9 @@ function renderModal(index) {
                 <div class="modal-infos">
                     <ul class="modal-categories">
                         <li onclick="showGeneralStats(${index})">General</li>
-                        <li onclick="showAttributes(${index})">Attributes</li>
+                        <li onclick="showAttributes(${index})">Base Stats</li>
                         <li onclick="showEvolutionChain(${index})">Evolution</li>
+                        <li onclick="showForms(${index})">Forms</li>
                     </ul>
                     <div id="modalContent"></div>
                 </div>
@@ -58,18 +68,22 @@ function showAttributes(index) {
     const pokStats = allPokemonInfos[index].stats;
     const labels = ["Health", "Attack", "Defense", "Special-Atk", "Special-Def", "Speed"];
     const data = pokStats.map(stat => stat.base_stat);
-    const modalContentHTML = `<div id="statsChart" class="stats-chart"><canvas id="pokemonChart"></canvas></div>`;
+    const modalContentHTML = `
+        <div id="statsChart" class="stats-chart">
+            <canvas id="pokemonChart"></canvas>
+        </div>`;
     document.getElementById('modalContent').innerHTML = modalContentHTML;
-    const ctx = document.getElementById('pokemonChart').getContext('2d');
-    new Chart(ctx, {
+    const attributeChart = document.getElementById('pokemonChart').getContext('2d');
+    new Chart(attributeChart, {
         type: 'bar',
         data: {
             labels: labels,
             datasets: [{
                 label: 'Stats',
                 data: data,
-                backgroundColor: '#4CAF50',
-                borderWidth: 0,
+                backgroundColor: ['#4CAF50','#e8ab13','#dd7200','#3a7bb7','#734aba','#df57d8'],
+                borderWidth: 1,
+                borderColor: '#00000063',
                 borderRadius: 5
             }]
         },
@@ -121,7 +135,19 @@ function showGeneralStats(index) {
         </li>
         <li>
             <h3 class="attribute-title">Types:</h3>
-            <p>${allPokemonInfos[index].types.map(typeInfo => typeInfo.type.name).join(', ')}</p>
+            <div class="type-icons-modal-container">
+                <div>
+                    ${allPokemonInfos[index].types.map(typeInfo => `
+                        <p>${typeInfo.type.name}</p>
+                        <img 
+                            class="type-icon-modal ${typeInfo.type.name}" 
+                            title="${typeInfo.type.name}"
+                            src="./assets/img/04_type_icons/blank/${typeInfo.type.name}.png" 
+                            alt="${typeInfo.type.name}">
+                        `
+                    ).join("|")}
+                </div>
+            </div>
         </li>
         <li>
             <h3 class="attribute-title">Gender:</h3>
@@ -130,6 +156,18 @@ function showGeneralStats(index) {
     </ul>
     `;
 }
+
+function showForms(index) {
+    document.getElementById('modalContent').innerHTML = "";
+    document.getElementById('modalContent').innerHTML = `
+    <div class="shiny-form-container">
+            <h3 class="form-title">Shiny Form:</h3>
+            <img class="shiny-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${allPokemonInfos[index].id}.png">
+            <img class="shiny-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/${allPokemonInfos[index].id}.png">
+    </div>
+    `;
+}
+
 
 function getGenderRate(index) {
     let genderRate = allPokemonSpecies[index].gender_rate;

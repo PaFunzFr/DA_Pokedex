@@ -57,9 +57,11 @@ p {
 
 header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    border-radius: 15px;
     background-color: #ffcc00;
     padding: 12px 0 5px 0;
     text-align: center;
@@ -133,6 +135,7 @@ main {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
+
 .card-title-id {
     display: flex;
     align-items: center;
@@ -200,6 +203,14 @@ main {
 .modal-img {
     height: 280px;
     filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.945));
+}
+
+.type-icon {
+    height: 36px;
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.8));
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 4
 }
 
 .modal-img-container {
@@ -312,6 +323,21 @@ main {
     max-height: calc(666px - 16px);
 }
 
+.type-icons-modal-container {
+    display: flex;
+    gap: 10px;
+}
+
+.type-icons-modal-container div{
+    display: flex;
+    gap: 5px;
+}
+
+.type-icon-modal {
+    border-radius: 50%;
+    height: 20px;
+}
+
 .modal-attributes {
     display: flex;
     flex-direction: column;
@@ -338,6 +364,21 @@ main {
 .stats-chart {
     height: 220px;
     margin: -10px 10px 0 10px;
+}
+
+.shiny-form-container {
+    height: 100%;
+}
+
+.form-title {
+    font-size: 18px;
+}
+
+.shiny-img {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.7));
 }
 
 .loader {
@@ -428,7 +469,8 @@ main {
     transform: scale(1.02);
 }
 
-.evo-name {
+.evo-name,
+.form-title {
     font-family: 'Bubblegum Sans';
 }
 
@@ -651,6 +693,10 @@ main {
         --shadow2: 2px;
         --shadow3: 1px;
         border: 2px solid rgb(131, 113, 13);
+    }
+
+    main {
+        margin-top: 100px;
     }
 }
 
