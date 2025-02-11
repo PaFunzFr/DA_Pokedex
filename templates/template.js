@@ -33,6 +33,7 @@ function renderPokemonCards(offset, arrayData, arrayInfos, arraySpecies, rendere
 }
 
 function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
+    let pokId = arrayInfos[index].id;
     return pokemonDetailModal.innerHTML = `
         <div class="pok-detail-content ${isPokemonLegendary(index, arraySpecies)} ${arrayInfos[index].types[0].type.name}" id="pokemonDetailContent">
             <div id="pokemonDetails${index}">
@@ -46,7 +47,7 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
                     <img class="modal-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${arrayInfos[index].id}.png" alt="${arrayInfos[index].id}">
                 </div>
                 <div class="close-modal-btn" onclick="closeModalBtn()">x</div>
-                <img class="poke-cry" onclick="playCry(${index})" src="./assets/img/03_general/play_sound.png">
+                <img class="poke-cry" onclick="playCry(${pokId})" src="./assets/img/03_general/play_sound.png">
                 <p class="poke-index">#${formatPokemonId(arrayInfos[index].id)}</p>
                 <div id="general-properties">
                     <div class="modal-infos">
@@ -166,7 +167,6 @@ function renderForms(infoSource) {
     `;
 }
 
-
 function getGenderRate(speciesSource) {
     let genderRate = speciesSource.gender_rate;
     const maleSymbol = `<img class="female" src="./assets/img/03_general/male.svg">`;
@@ -208,7 +208,6 @@ function getGenderRate(speciesSource) {
     return genderText;
 }
 
-
 async function renderEvolutionChain(arraySpecies) {
     try {
         const evolutions = await fetchEvolutionChain(arraySpecies);
@@ -231,7 +230,7 @@ function renderFirstEvolution(evolutions) {
     const firstPokemonId = evolutions.chain.species.url.split('/')[6];
     return `
         <div class="evolution-step">
-            <img onclick="playCry(${parseFloat(firstPokemonId) - 1})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
+            <img onclick="playCry(${parseFloat(firstPokemonId)})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${firstPokemonId}.png" alt="${evolutions.chain.species.name}">
             <p class="evo-name">${formattingFirstLetter(evolutions.chain.species.name)}</p>
         </div>
         <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">`;
@@ -242,7 +241,7 @@ function renderSecondEvolution(evolutions) {
         const secondPokemonId = evolutions.chain.evolves_to[0].species.url.split('/')[6];
         return `
             <div class="evolution-step">
-                <img onclick="playCry(${parseFloat(secondPokemonId) - 1})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
+                <img onclick="playCry(${parseFloat(secondPokemonId)})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${secondPokemonId}.png" alt="${evolutions.chain.evolves_to[0].species.name}">
                 <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].species.name)}</p>
             </div>`;
     }
@@ -255,13 +254,12 @@ function renderThirdEvolution(evolutions) {
         return `
         <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">
             <div class="evolution-step">
-                <img onclick="playCry(${parseFloat(thirdPokemonId) - 1})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${parseFloat(thirdPokemonId)}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
+                <img onclick="playCry(${parseFloat(thirdPokemonId)})" class="evo-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${parseFloat(thirdPokemonId)}.png" alt="${evolutions.chain.evolves_to[0].evolves_to[0].species.name}">
                 <p class="evo-name">${formattingFirstLetter(evolutions.chain.evolves_to[0].evolves_to[0].species.name)}</p>
             </div>`;
     }
     return "";
 }
-
 
 function checkForEvolutionAndRender(evolutionHTML) {
     if (evolutionHTML === "<div class='evolution-container'></div>") {

@@ -190,9 +190,9 @@ function calculateBarWidth(value) {
     return (percentage / 100) * maxWidth;
 }
 
-async function playCry(index) {
+async function playCry(id) {
     try {
-        let pokIndex = index + 1;
+        let pokIndex = id;
         let response = await fetch(`https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokIndex}.ogg`);
         let audioUrl = URL.createObjectURL(await response.blob());
         let audio = new Audio(audioUrl);
@@ -438,6 +438,13 @@ async function renderNextPok(index, infoSource, speciesSource, renderedFor) {
     }
 }
 
+async function renderPrevPok(index, infoSource, speciesSource, renderedFor) {
+    if (index > 0) { 
+        index--;
+        openModal(index, infoSource, speciesSource, renderedFor);
+    }
+}
+
 function hideNextButtonIfLast(index, infoSource, renderedFor) {
     console.log("triggered" + index);
     if (renderedFor === "searchedData") {
@@ -452,12 +459,5 @@ function hidePrevButtonIfFirst(index, renderedFor) {
     const prevButton = document.getElementById(`pre-${renderedFor}${index}`);
     if (index === 0 && prevButton) {
         prevButton.innerText = "";
-    }
-}
-
-async function renderPrevPok(index, infoSource, speciesSource, renderedFor) {
-    if (index > 0) { 
-        index--;
-        openModal(index, infoSource, speciesSource, renderedFor);
     }
 }
