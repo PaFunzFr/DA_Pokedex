@@ -9,6 +9,10 @@ let selectedPokemon = null;
 let loading = false;
 let isSearching = false;
 let isLoadingEnabled = false;
+let filterActive = false;
+let activeFilters = [];
+let filterDataName = "commonData";
+let filterButtonClicked = false;
 
 const allPokemonToLoad = 1025;
 const renderedForData = "commonData";
@@ -485,10 +489,7 @@ function hideAllButtonIfFilterActive() {
     }
 }
 
-let filterActive = false;
-let activeFilters = [];
-let filterDataName = "commonData";
-
+// filter functions
 function filterButton(event) {
     disableLoadOnScroll();
     const filteredType = event.target.id.split("-")[1];
@@ -547,8 +548,38 @@ function renderFilterButtons(sourceArray) {
             <img 
                 src="./assets/img/04_type_icons/blank/${type}.png" 
                 class="filter-btn-type ${type}" id="filterButton-${type}" 
-                onclick="filterButton(event)"
+                onclick="filterButton(event), scaleClickedButton(event)"
             >
         `;
     });
 }
+
+function scaleClickedButton(event) {
+    let button = event.target;
+    if (button.style.width === "30px") {
+        button.style.width = "";
+        button.style.height = "";
+        button.style.border = "";
+    } else {
+        button.style.width = "30px"; 
+        button.style.height = "30px";
+        button.style.border = "3px solid rgb(243, 243, 245)";
+    }
+}
+
+function showFilterButtons() {
+    const filterButton = document.getElementById("filterContainer");
+    if (!filterButtonClicked) {
+        filterButton.style.opacity = "1";
+        filterButton.style.bottom = "55px";
+        filterButtonClicked = true;
+    } else {
+        filterButton.style.opacity = "0";
+        filterButton.style.bottom = "";
+        filterButtonClicked = false;
+        activeFilters = [];
+        resetFilter();
+        renderFilterButtons(allPokemonInfos);
+    };
+}
+
