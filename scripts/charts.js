@@ -158,7 +158,6 @@ const pokemonChartHeaviest = new Chart(chartHeaviest, {
     },
 });
 
-
 // smallest Pokemon
 const chartSmallest = document.getElementById('pokemonBySizeSmall').getContext('2d');
 const pokemonChartSmallest = new Chart(chartSmallest, {
@@ -227,7 +226,6 @@ const pokemonChartSmallest = new Chart(chartSmallest, {
         }
     }
 });
-
 
 // biggest pokemon
 const ctx = document.getElementById('pokemonBySizeBig').getContext('2d');
@@ -338,7 +336,6 @@ new Chart(primaryTypeContainer, {
         
     }
 });
-
 
 // pokemon by region
 const ctx5 = document.getElementById('pokemonLineChart').getContext('2d');

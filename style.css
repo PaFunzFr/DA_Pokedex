@@ -100,17 +100,32 @@ header {
     border-radius: 15px;
     gap: 10px;
     justify-content: space-between;
-    bottom: 30px;
+    bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: 50%;
     max-width: 500px;
     min-width: 300px;
     height: 30px;
-    z-index: 10;
+    z-index: 11;
     background-color: #ffcc00;
     padding: 10px;
     filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.9));
+}
+
+.filter-banner {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    position: fixed;
+    gap: 4px;
+    justify-content: center;
+    bottom: 55px;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 300px;
+    max-width: 500px;
+    z-index: 10;
+    padding: 100px 10px 15px 10px;
 }
 
 .reset-btn {
@@ -133,7 +148,6 @@ header {
     border-radius: 5px;
     border: none;
 }
-
 .filter-btn,
 .search-btn {
     padding: 8px;
@@ -144,6 +158,17 @@ header {
     border: none;
     border-radius: 50%;
     filter: drop-shadow(0 0 2px rgb(27, 31, 52));
+    cursor: pointer;
+}
+
+.filter-btn-type {
+    padding: 1px;
+    height: 22px;
+    width: 22px;
+    background-color: #3366cc;
+    border: 2px solid #8092b6;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 5px #183265);
     cursor: pointer;
 }
 
@@ -166,7 +191,7 @@ header {
 .shadow-bottom {
     position: fixed;
     bottom: 0;
-    height: 120px;
+    height: 190px;
     background: linear-gradient(to top, rgb(8, 10, 18), transparent );
 }
 
