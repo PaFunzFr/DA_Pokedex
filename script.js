@@ -127,7 +127,6 @@ function disableLoadOnScroll() {
     isLoadingEnabled = false;
 }
 
-// Funktion zum Aktivieren der Scroll-Funktion
 function enableLoadOnScroll() {
     isLoadingEnabled = true;
 }
@@ -206,7 +205,7 @@ async function playCry(id) {
 function isPokemonLegendary(index, arraySpecies) {
     if (!arraySpecies || !arraySpecies[index]) {
         console.error(`Fehler: arraySpecies[${index}] ist undefined.`, arraySpecies);
-        return "common"; // Standardwert, um Absturz zu vermeiden
+        return "common";
     }
     
     if (arraySpecies[index].is_legendary || arraySpecies[index].is_mythical) {
@@ -285,19 +284,26 @@ window.addEventListener("scroll", () => {
     }
 });
 
-async function searchAllPokemon() {
+function clickedSearcButton() {
+    const partialName = document.getElementById("searchBar").value.toLowerCase();
+    if (checkSearchInput(partialName)) {
+        return
+    } else {
+        searchAllPokemons(partialName);
+    };
+}
+
+async function searchAllPokemons(partialName) {
     disableLoadOnScroll();
     resetAllSearchArrays ();
     isSearching = true;
-    const partialName = document.getElementById("searchBar").value.toLowerCase();
-    checkSearchInput(partialName);
     try {
         await getAllSearchedData(partialName);
         hideAllCommonCardsAndResetBar();
     } catch (error) {
         console.error("Fehler:", error.message);
     }
-}
+} 
 
 function hideAllCommonCardsAndResetBar() {
     let allCommonCards = document.querySelectorAll(`.pokemon-card[data-name='${renderedForData}']`);
@@ -328,9 +334,11 @@ function resetSearch() {
 
 function checkSearchInput(input) {
     if (input.length < 3) {
-        return;
+        console.log("minimum input length: 3 letters");
+        return true;
     }
     resetButtton.style.display = "flex";
+    return false;
 }
 
 async function fetchSearchedPokemon(partialName) {

@@ -718,7 +718,7 @@ main {
         display: flex;
         flex-direction: column;
         width: 47%;
-        height: auto;
+        height: 320px;
         margin: 0px;
         padding: 10px;
     }
@@ -743,7 +743,6 @@ main {
     }
 
     .main-pic {
-        margin: 0 auto;
         object-fit: contain;
         width: 100%;
         margin-bottom: 8px;
@@ -812,11 +811,26 @@ main {
         font-size: 20px;
         font-weight: 200;
     }
-    
+    .main-pic {
+        object-fit: contain;
+        margin-top: 5px;
+        width: 100%;
+        height: 120px;
+    }
+
+    .pokemon-card {
+        height: 220px;
+    }
+
+    .type-icon {
+        height: 28px;
+    }
+
     .pokemon-card p {
         font-size: 14px;
         margin-top: 2px;
     }
+
     h3 {
         margin: 2px 0;
         font-size: 12px;
