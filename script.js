@@ -556,26 +556,29 @@ function renderFilterButtons(sourceArray) {
 
 function scaleClickedButton(event) {
     let button = event.target;
-    if (button.style.width === "30px") {
+    if (button.style.width === "36px") {
         button.style.width = "";
         button.style.height = "";
         button.style.border = "";
     } else {
-        button.style.width = "30px"; 
-        button.style.height = "30px";
+        button.style.width = "36px"; 
+        button.style.height = "36px";
         button.style.border = "3px solid rgb(243, 243, 245)";
     }
 }
 
 function showFilterButtons() {
-    const filterButton = document.getElementById("filterContainer");
+    const filterConainter = document.getElementById("filterContainer");
+    const filterButton = document.getElementById("filterButton");
     if (!filterButtonClicked) {
-        filterButton.style.opacity = "1";
-        filterButton.style.bottom = "55px";
+        filterConainter.style.opacity = "1";
+        filterConainter.style.bottom = "60px";
+        filterButton.style.backgroundColor = "#204081";
         filterButtonClicked = true;
     } else {
-        filterButton.style.opacity = "0";
-        filterButton.style.bottom = "";
+        filterConainter.style.opacity = "0";
+        filterConainter.style.bottom = "";
+        filterButton.style.backgroundColor = "";
         filterButtonClicked = false;
         activeFilters = [];
         resetFilter();
