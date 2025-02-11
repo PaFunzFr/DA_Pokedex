@@ -177,9 +177,9 @@ function enableScroll() {
 function openModal(pokemonId, arrayInfos, arraySpecies, renderedFor) {
     selectedPokemon = pokemonId;
     renderModal(selectedPokemon, arrayInfos, arraySpecies, renderedFor);
-    hideAllButtonIfFilterActive();
     hidePrevButtonIfFirst(pokemonId, renderedFor);
     hideNextButtonIfLast(pokemonId, arrayInfos, renderedFor);
+    hideAllButtonIfFilterActive();
     showStats(pokemonId, renderedFor);
     pokemonDetailModal.style.display ="flex";
     disableScroll();
@@ -210,7 +210,6 @@ function isPokemonLegendary(index, arraySpecies) {
         console.error(`Fehler: arraySpecies[${index}] ist undefined.`, arraySpecies);
         return "common";
     }
-    
     if (arraySpecies[index].is_legendary || arraySpecies[index].is_mythical) {
         return "legendary";
     } else {
@@ -299,6 +298,7 @@ function clickedSearcButton() {
 async function searchAllPokemons(partialName) {
     disableLoadOnScroll();
     resetAllSearchArrays ();
+    filterDataName = "searchedData";
     isSearching = true;
     try {
         await getAllSearchedData(partialName);
@@ -487,6 +487,7 @@ function hideAllButtonIfFilterActive() {
 
 let filterActive = false;
 let activeFilters = [];
+let filterDataName = "commonData";
 
 function filterButton(event) {
     disableLoadOnScroll();
@@ -496,7 +497,7 @@ function filterButton(event) {
 
 function useFilter(filteredType) {
     if (activeFilters.includes(filteredType)) {
-        activeFilters = activeFilters.filter(filter => filter!== filteredType);
+        activeFilters = activeFilters.filter(filter => filter !== filteredType);
         if (activeFilters.length === 0) {
             resetFilter();
             renderFilterButtons(allPokemonInfos);
@@ -510,21 +511,24 @@ function useFilter(filteredType) {
 
 function isolatePokemon() {
     filterActive = true;
-    let allCards = Array.from(document.querySelectorAll(`.pokemon-card`));
+    let allCards = Array.from(document.querySelectorAll('.pokemon-card'));
     allCards.forEach(card => card.style.display = 'none');
     activeFilters.forEach((type) => {
-        let filteredCards = allCards.filter(card => card.classList.contains(type));
+        let filteredCards = allCards.filter(card => 
+            card.classList.contains(type) && card.getAttribute('data-name') === filterDataName
+        );
         filteredCards.forEach(card => card.style.display = 'block');
-    })
+    });
 }
 
 function resetFilter() {
     let allCardsArray = Array.from(document.querySelectorAll('.pokemon-card'));
     allCardsArray.forEach(card => card.style.display = 'block');
     enableLoadOnScroll();
-    resetAllSearchArrays ();
+    resetAllSearchArrays();
     resetSearch();
     filterActive = false;
+    filterDataName = "commonData";
 }
 
 function renderFilterButtons(sourceArray) {
@@ -537,6 +541,7 @@ function renderFilterButtons(sourceArray) {
             uniqueTypes.add(primaryType);
         }
     });
+
     uniqueTypes.forEach((type) => {
         typeButtonContainer.innerHTML += `
             <img 
