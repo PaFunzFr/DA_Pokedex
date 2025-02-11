@@ -176,7 +176,8 @@ function enableScroll() {
 function openModal(pokemonId, arrayInfos, arraySpecies, renderedFor) {
     selectedPokemon = pokemonId;
     renderModal(selectedPokemon, arrayInfos, arraySpecies, renderedFor);
-    //checkForFirstModalPokemon(selectedPokemon);
+    hidePrevButtonIfFirst(pokemonId, renderedFor);
+    hideNextButtonIfLast(pokemonId, arrayInfos, renderedFor);
     showStats(pokemonId, renderedFor);
     pokemonDetailModal.style.display ="flex";
     disableScroll();
@@ -202,7 +203,6 @@ async function playCry(index) {
     }
 }
 
-
 function isPokemonLegendary(index, arraySpecies) {
     if (!arraySpecies || !arraySpecies[index]) {
         console.error(`Fehler: arraySpecies[${index}] ist undefined.`, arraySpecies);
@@ -215,7 +215,6 @@ function isPokemonLegendary(index, arraySpecies) {
         return "common";
     }
 }
-
 
 function isPokemonLegendaryTitle(index, arraySpecies) {
     if (arraySpecies[index].is_legendary || arraySpecies[index].is_mythical) {
@@ -258,7 +257,6 @@ function formattingFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-
 function checkForFirstModalPokemon(index) {
     if (index === 0) {
         document.getElementById('prevPok').innerText = "";
@@ -294,20 +292,28 @@ async function searchAllPokemon() {
     const partialName = document.getElementById("searchBar").value.toLowerCase();
     checkSearchInput(partialName);
     try {
-        await fetchSearchedPokemon(partialName);
-        await getPokemonInfos(searchedPokemonData, searchedPokemonInfos, searchedPokemonSpecies);
-        renderPokemonCards(0, searchedPokemonData, searchedPokemonInfos, searchedPokemonSpecies, renderedForSearch);
-        let allCommonCards = document.querySelectorAll(`.pokemon-card[data-name='${renderedForData}']`);
-        allCommonCards.forEach(card => {
-            card.style.display = "none";
-        });
-        setTimeout(() => {
-            isSearching = false;
-        }, 500);
-        document.getElementById("searchBar").value = "";
+        await getAllSearchedData(partialName);
+        hideAllCommonCardsAndResetBar();
     } catch (error) {
         console.error("Fehler:", error.message);
     }
+}
+
+function hideAllCommonCardsAndResetBar() {
+    let allCommonCards = document.querySelectorAll(`.pokemon-card[data-name='${renderedForData}']`);
+    allCommonCards.forEach(card => {
+        card.style.display = "none";
+    });
+    setTimeout(() => {
+        isSearching = false;
+    }, 500);
+    document.getElementById("searchBar").value = "";
+}
+
+async function getAllSearchedData(partialName) {
+    await fetchSearchedPokemon(partialName);
+    await getPokemonInfos(searchedPokemonData, searchedPokemonInfos, searchedPokemonSpecies);
+    renderPokemonCards(0, searchedPokemonData, searchedPokemonInfos, searchedPokemonSpecies, renderedForSearch);
 }
 
 function resetSearch() {
@@ -348,73 +354,56 @@ function resetAllSearchArrays () {
 
 //assisting render functions
 function showStats(index, renderedFor) {
-    let infoSource = checkInfoSource(index, renderedFor);
-    let speciesSource = checkSpeciesSource(index, renderedFor);
+    let infoSource = getInfoSourceIndex(index, renderedFor);
+    let speciesSource = getSpeciesSourceIndex(index, renderedFor);
     showGeneralStats(infoSource, speciesSource);
 }
 
 function showStatsModal(event, index) {
     const whatDataToRender = event.target.id;
-    let infoSource = checkInfoSource(index, whatDataToRender);
-    let speciesSource = checkSpeciesSource(index, whatDataToRender);
+    let infoSource = getInfoSourceIndex(index, whatDataToRender);
+    let speciesSource = getSpeciesSourceIndex(index, whatDataToRender);
     showGeneralStats(infoSource, speciesSource);
 }
 
 function showAttributes(event, index) {
     const whatDataToRender = event.target.id;
-    let infoSource = checkInfoSource(index, whatDataToRender);
+    let infoSource = getInfoSourceIndex(index, whatDataToRender);
     renderGraphAttributes(infoSource);
 }
 
 function showEvolutionChain(event, index) {
     const whatDataToRender = event.target.id;
-    let speciesSource = checkSpeciesSource(index, whatDataToRender);
+    let speciesSource = getSpeciesSourceIndex(index, whatDataToRender);
     renderEvolutionChain(speciesSource);
 }
 
 function showForms(event, index) {
     const whatDataToRender = event.target.id;
-    let infoSource = checkInfoSource(index, whatDataToRender);
+    let infoSource = getInfoSourceIndex(index, whatDataToRender);
     renderForms(infoSource);
 }
 
-function checkInfoSource(index, whatDataToRender) {
-    let pokStats;
-    if (whatDataToRender.includes("common")) {
-        pokStats = allPokemonInfos[index];
-    } else if (whatDataToRender.includes("searched")) {
-        pokStats = searchedPokemonInfos[index];
-    }
+function getInfoSource(whatDataToRender) {
+    let pokStats = whatDataToRender.includes("common") ? 
+        allPokemonInfos : searchedPokemonInfos;
     return pokStats;
 }
-
-function getInfoSource(whatDataToRender) {
-    let pokStats;
-    if (whatDataToRender.includes("common")) {
-        pokStats = allPokemonInfos;
-    } else if (whatDataToRender.includes("searched")) {
-        pokStats = searchedPokemonInfos;
-    }
+function getInfoSourceIndex(index, whatDataToRender) {
+    let pokStats = whatDataToRender.includes("common") ? 
+        allPokemonInfos[index] : searchedPokemonInfos[index];
     return pokStats;
 }
 
 function getSpeciesSource(whatDataToRender) {
-    let pokStats;
-    if (whatDataToRender.includes("common")) {
-        pokStats = allPokemonSpecies;
-    } else if (whatDataToRender.includes("searched")) {
-        pokStats = searchedPokemonSpecies;
-    }
+    let pokStats = whatDataToRender.includes("common") ? 
+        allPokemonSpecies: searchedPokemonSpecies;
     return pokStats;
 }
 
-function checkSpeciesSource(index, whatDataToRender) {
-    let pokStats;
-    if (whatDataToRender.includes("common")) {
-        pokStats = allPokemonSpecies[index];
-    } else if (whatDataToRender.includes("searched")) {
-        pokStats = searchedPokemonSpecies[index];
-    }
+function getSpeciesSourceIndex(index, whatDataToRender) {
+    let pokStats = whatDataToRender.includes("common") ? 
+        allPokemonSpecies[index] : searchedPokemonSpecies[index];
     return pokStats;
 }
 
@@ -436,17 +425,33 @@ function prevPok(event, index) {
 }
 
 async function renderNextPok(index, infoSource, speciesSource, renderedFor) {
-    console.log();
     if (index < infoSource.length - 1) {
         index++;
         openModal(index, infoSource, speciesSource, renderedFor);
-    } else if (selectedPokemon => infoSource.length -1) {
-        //await loadMorePokemon();
-        index++;
-        openModal(index, infoSource, speciesSource, renderedFor);
-        setTimeout(() => {
-            disableScroll();
-        }, 400);
+    } else if (index >= infoSource.length - 1) {
+        if (renderedFor === "commonData") {
+            await loadMorePokemon();
+            index++;
+            openModal(index, infoSource, speciesSource, renderedFor);
+            setTimeout(disableScroll, 400);
+        }
+    }
+}
+
+function hideNextButtonIfLast(index, infoSource, renderedFor) {
+    console.log("triggered" + index);
+    if (renderedFor === "searchedData") {
+        const nextButton = document.getElementById(`nxt-${renderedFor}${index}`);
+        if (index >= infoSource.length - 1 && nextButton) {
+            nextButton.innerText = "";
+        }
+    }
+}
+
+function hidePrevButtonIfFirst(index, renderedFor) {
+    const prevButton = document.getElementById(`pre-${renderedFor}${index}`);
+    if (index === 0 && prevButton) {
+        prevButton.innerText = "";
     }
 }
 
