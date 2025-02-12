@@ -29,6 +29,7 @@ async function searchAllPokemons(partialName) {
         console.error("Error:", error.message);
     }
     renderFilterButtons(searchedPokemonInfos);
+    renderLoadingBall();
 }
 
 /**
@@ -69,6 +70,8 @@ function resetSearch() {
     enableLoadOnScroll();
     renderFilterButtons(allPokemonInfos);
     filterActive = false;
+    isSearching = false;
+    checkWindowHeightAndShowLoadingButton();
 }
 
 /**

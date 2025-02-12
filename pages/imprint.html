@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="../styles/style_type_colors.css">
     <link rel="stylesheet" href="../styles/style_variables.css">
     <link rel="stylesheet" href="../styles/fonts.css">
-    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../styles/imprint.css">
     <link rel="stylesheet" href="../styles/standards.css">
     <link rel="stylesheet" href="../styles/assets.css">
     <link rel="stylesheet" href="../styles/animations_mediaqueries.css">
@@ -23,8 +23,8 @@
             <div class="header-container max-width">
                 <a href="../index.html"><img class="header-img" src="../assets/img/01_header/pokedex.png"></a>
                 <div class="navigation-container">
-                    <a href="../index.html" class="desktop">PokeDex</a>
-                    <a href="./dashboard.html" class="desktop">PokeDash</a>
+                    <a href="../index.html" class="desktop">PokéDex</a>
+                    <a href="./dashboard.html" class="desktop">PokéDash</a>
                     <a href="../index.html" class="mobile nav-icon"><img src="../assets/img/01_header/books_white.png" alt="picture of chart"></a>
                     <a href="./dashboard.html" class="mobile nav-icon" ><img src="../assets/img/01_header/chart_white.png" alt="picture of infor symbol"></a>
                 </div>
@@ -33,12 +33,34 @@
 
     <div class="shadow-top"></div>
 
-    <main>
-        <h2>Alles super hier!</h2>
+    <main class="imprint-main">
+        <section class="imprint-container">
+            <h2>Imprint</h2>
+            <section class="peronal-info">
+                <h3 class="imprint-subtitle">About Me</h3>
+                <p>Name: Patrick Frey</p>
+                <p>Address: Burgallee 9, 61231 Bad Nauheim</p>
+                <ul class="contact-infos">Contact Information:
+                    <li class="margin-left">Email: <a class="imprint-href" href="mailto:frey89.pat@gmail.com">frey89.pat@gmail.com</a></li>
+                    <li class="margin-left">Phone: +49 173/1500779</li>
+                </ul>
+            </section>
+    
+            <section class="pokeapi">
+                <h3 class="imprint-subtitle">Use of PokeAPI</h3>
+                <p>This website uses data from the <a class="imprint-href" href="https://pokeapi.co/" target="_blank">PokeAPI</a>, a free and open-source API providing access to Pokémon data. The data is used for educational and entertainment purposes only.</p>
+            </section>
+    
+            <section class="disclaimer">
+                <h3 class="imprint-subtitle">Disclaimer</h3>
+                <p>All information provided on this website is for informational purposes only.<br>
+                    I make no guarantees regarding the accuracy or completeness of the data displayed and am not responsible for any direct or indirect damages caused by the use of this website.</p>
+            </section>
+        </section>
     </main>
     <footer>
-        <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
+        <div class="shadow-bottom"></div>
     </footer>
+
 </body>
-    <script src="../templates/template.js"></script>
 </html>

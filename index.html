@@ -21,7 +21,7 @@
         <div class="header-container max-width">
             <a href="#toTop"><img class="header-img" src="./assets/img/01_header/pokedex.png"></a>
             <div class="navigation-container" id="navBar">
-                <a href="./pages/dashboard.html" class="desktop" id="toPokeDash">PokeDash</a>
+                <a href="./pages/dashboard.html" class="desktop" id="toPokeDash">PokéDash</a>
                 <a href="./pages/imprint.html"  class="desktop">About</a>
                 <a href="./pages/dashboard.html" class="mobile nav-icon"><img src="./assets/img/01_header/chart_white.png" alt="picture of chart"></a>
                 <a href="./pages/imprint.html" class="mobile nav-icon" ><img src="./assets/img/01_header/info_white.png" alt="picture of infor symbol"></a>
@@ -37,16 +37,10 @@
         <div class="spinner-center"></div>
     </section>
 
-    <section class="info-messages">
-        <div id="noResultsMessage">keine POKEMON!!!</div>
-    </section>
-
-    <section class="scroll-info" id="loadingContainer">
-
-        
-    </section>
-
     <div class="shadow-top"></div>
+    <section class="scroll-info" id="loadingContainer">
+        <!-- rendered info -->
+    </section>
 
     <main>
         <div class="pokemon-container" id="pokemonContainer">
@@ -65,17 +59,14 @@
         <!-- rendered filter icons -->
     </section>
 
-    <div class="shadow-bottom"></div>
 
     <footer>
-        <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
+        <div class="shadow-bottom"></div>
     </footer>
 
     <section onclick="closeModal(event)" class="pokemon-details-container" id="pokemonDetailModal">
         <!-- rendered modal -->
     </section>
-
-
 </body>
     <script src="./data/de.js"></script>
     <script src="./templates/template.js"></script>

@@ -1,5 +1,6 @@
 :root {
     --common-blue: rgb(27, 31, 52);
+    --common-orange: #ffcc00;
     --button-blue: #3366cc;
     --button-highlight: #cc33c4;
     --transition: all 0.3s ease;

@@ -105,8 +105,8 @@
     height: 34px;
     bottom: 296px;
     font-size: 22px;
-    color: #ffcc00;
-    border: 1px solid #ffcc00;
+    color: var(--common-orange);
+    border: 1px solid var(--common-orange);
 }
 
 .poke-cry {
@@ -115,7 +115,7 @@
     right: 15px;
     width: 40px;
     opacity: 0.4;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .poke-index {
@@ -160,7 +160,7 @@
     height: 35px;
     padding-top: 2px;
     border-radius: 10px 10px 0 0;
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .modal-categories li:hover {
@@ -272,18 +272,18 @@
 }
 
 .male {
-    filter: invert(33%) sepia(100%) saturate(300%) hue-rotate(200deg);
+    filter: invert(33%) sepia(100%) saturate(300%) hue-rotate(300deg);
 }
 
 .female {
-    filter: invert(33%) sepia(100%) saturate(300%) hue-rotate(300deg);
+    filter: invert(33%) sepia(100%) saturate(300%) hue-rotate(200deg);
 }
 
 .evo-img {
     width: 90px;
     flex: 1;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.704));
-    transition: all 0.3s ease;
+    transition: var(--transition);
 }
 
 .evo-img:hover {

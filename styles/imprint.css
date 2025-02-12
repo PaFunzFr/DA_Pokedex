@@ -1,0 +1,52 @@
+.imprint-main {
+    color: white;
+    letter-spacing: 1px;
+}
+
+.imprint-main h2 {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.margin-left {
+    margin-left: 20px;
+    list-style-type: circle;
+}
+
+.imprint-container {
+    margin: 30px auto 200px auto;
+    max-width: 1280px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.imprint-container section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.imprint-container section h3 {
+    color: var(--common-orange);
+}
+
+.imprint-subtitle {
+    font-size: 30px;
+}
+
+.imprint-href {
+    font-size: 20px;
+    color: var(--button-highlight);
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.6));
+}
+
+.imprint-href:hover {
+    color: var(--button-highlight);
+    filter: drop-shadow(0 0 4px rgba(0,0,0,0.6));
+}
+
+.contact-infos {
+    padding: 0;
+    margin: 0;
+}

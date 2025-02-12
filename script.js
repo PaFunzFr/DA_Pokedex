@@ -134,8 +134,6 @@ async function getPokemonInfos(pokemonList, arrayInfos, arraySpecies) {
     fetchAllData(pokemonList, fetchPromises);
     const results = await Promise.all(fetchPromises.map(entries => Promise.all(entries)));
     pushDataToArray(results, arrayInfos, arraySpecies);
-    console.log(arrayInfos);
-    console.log(arraySpecies);
 }
 
 /**

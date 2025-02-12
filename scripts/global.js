@@ -67,7 +67,7 @@ window.addEventListener("resize", checkWindowHeightAndShowLoadingButton);
  * and exactly 30 Pokemon are shown. Otherwise, it displays a loading ball.
  */
 function checkWindowHeightAndShowLoadingButton() {
-    if (window.innerHeight >= 2200 && currentShownPokemon === 30) {
+    if (window.innerHeight >= 2200 && currentShownPokemon === 30 && !isSearching) {
         renderLoadingBtn(); // Show the loading button if the conditions are met
     } else {
         renderLoadingBall(); // Show the loading ball otherwise
