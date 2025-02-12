@@ -23,12 +23,6 @@ document.getElementById("searchBar").addEventListener("keydown", (event) => {
     }
 });
 
-document.getElementById("searchBar").addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        clickedSearchButton();
-    }
-});
-
 /**
  * Searches for all Pokémon matching the partial name input.
  * Disables scroll loading, resets search arrays, and fetches Pokémon data.
