@@ -3,7 +3,7 @@
  * Retrieves the search input, converts it to lowercase, 
  * and initiates a search if the input length is sufficient.
  */
-function clickedSearcButton() {
+function clickedSearchButton() {
     const partialName = document.getElementById("searchBar").value.toLowerCase();
     if (checkIfInputLegit(partialName)) {
         return;
@@ -11,6 +11,23 @@ function clickedSearcButton() {
         searchAllPokemons(partialName);
     }
 }
+
+/**
+ * Adds an event listener to the search bar that triggers when the "Enter" key is pressed.
+ * @event keydown - Fired when a key is pressed down inside the search bar.
+ * @param {KeyboardEvent} event - The event object containing details about the key press.
+ */
+document.getElementById("searchBar").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        clickedSearchButton();
+    }
+});
+
+document.getElementById("searchBar").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        clickedSearchButton();
+    }
+});
 
 /**
  * Searches for all Pokémon matching the partial name input.

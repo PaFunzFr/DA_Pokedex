@@ -309,3 +309,4 @@ function formatPokemonId(id) {
 function formattingFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
 }
+
