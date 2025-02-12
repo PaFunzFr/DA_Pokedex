@@ -360,4 +360,32 @@ function renderFilterButtons(sourceArray) {
     });
 }
 
+/**
+ * Renders a loading ball animation inside the loading container.
+ */
+function renderLoadingBall() {
+    loadingContainer.style.animation = "";
+    loadingContainer.innerHTML = "";
+    loadingContainer.innerHTML = `
+        <div class="scroll-ball" id="scrollIcon">
+            <div class="ball-outer-body"></div>
+            <div class="ball-line"></div>
+            <div class="ball-inner-body"></div>
+        </div>
+        <p class="scroll-down" id="scrollInfo">Scroll down</p>
+    `;
+}
+
+/**
+ * Renders a "load more" button inside the loading container.
+ */
+function renderLoadingBtn() {
+    loadingContainer.style.animation = "none";
+    loadingContainer.innerHTML = "";
+    loadingContainer.innerHTML = `
+        <button onclick="loadMorePokemonBtn()" id="loadButton">
+                load more
+        </button>
+    `;
+}
 

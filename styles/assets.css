@@ -1,3 +1,20 @@
+#loadButton {
+    display: "none";
+    font-family: 'Bubblegum Sans';
+    font-size: 30px;
+    padding: 10px 20px;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    border: none;
+    background-color: var(--button-blue);
+    color: white;
+    cursor: pointer;
+}
+
+#loadButton:hover {
+    transform: scale(1.04);
+}
+
 .search-banner,
 .filter-banner {
     display: flex;

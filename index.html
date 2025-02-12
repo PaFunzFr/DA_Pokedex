@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body id="toTop" onload="init();">
+<body id="toTop" onload="init()">
     <header id="header">
         <div class="header-container max-width">
             <a href="#toTop"><img class="header-img" src="./assets/img/01_header/pokedex.png"></a>
@@ -39,22 +39,19 @@
         <div id="noResultsMessage">keine POKEMON!!!</div>
     </section>
 
-    <section class="scroll-info">
-        <div class="scroll-ball">
-            <div class="ball-outer-body"></div>
-            <div class="ball-line"></div>
-            <div class="ball-inner-body"></div>
-        </div>
-        <p class="scroll-down">Scroll down</p>
+    <section class="scroll-info" id="loadingContainer">
+
+        
     </section>
 
     <div class="shadow-top"></div>
 
     <main>
         <div class="pokemon-container" id="pokemonContainer">
-            <!-- rendered Pokemon here -->
+            <!-- rendered Pokemon cards -->
         </div>
     </main>
+
     <section class="search-banner">
         <input type="text" class="search-bar" id="searchBar" placeholder="Search Pokémon...">
         <div onclick="resetSearch()" id="resetBtn" class="reset-btn">RESET</div>
@@ -63,7 +60,7 @@
     </section>
 
     <section class="filter-banner" id="filterContainer">
-       
+        <!-- rendered filter icons -->
     </section>
 
     <div class="shadow-bottom"></div>
@@ -72,8 +69,9 @@
         <p>&copy; 2025 Pokedex Projekt by Patrick Frey</p>
     </footer>
 
-    <div onclick="closeModal(event)" class="pokemon-details-container" id="pokemonDetailModal">
-    </div>
+    <section onclick="closeModal(event)" class="pokemon-details-container" id="pokemonDetailModal">
+        <!-- rendered modal -->
+    </section>
 
 
 </body>

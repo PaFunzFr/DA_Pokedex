@@ -54,3 +54,22 @@ window.addEventListener("scroll", () => {
         shadow.style.height = "80px";
     }
 });
+
+/**
+ * Event listener that triggers the function to check the window height 
+ * and show either a loading button or a loading ball when the window is resized.
+ */
+window.addEventListener("resize", checkWindowHeightAndShowLoadingButton);
+
+/**
+ * Checks the current window height and the number of Pokemon currently shown,
+ * and displays a loading button if the window height is greater than or equal to 2200px 
+ * and exactly 30 Pokemon are shown. Otherwise, it displays a loading ball.
+ */
+function checkWindowHeightAndShowLoadingButton() {
+    if (window.innerHeight >= 2200 && currentShownPokemon === 30) {
+        renderLoadingBtn(); // Show the loading button if the conditions are met
+    } else {
+        renderLoadingBall(); // Show the loading ball otherwise
+    }
+}

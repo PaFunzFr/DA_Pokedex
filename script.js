@@ -56,7 +56,6 @@ let filterDataName = "commonData";
 const renderedForData = "commonData";
 const renderedForSearch = "searchedData";
 
-
 // DOM Elements
 const pokemonContainer = document.getElementById("pokemonContainer");
 const loadButton = document.getElementById("loadButton");
@@ -66,6 +65,9 @@ const closeModalButton = document.getElementById("closeModal");
 const nextPokemonButton = document.getElementById("nextPok");
 const prevPokemonButton = document.getElementById("prevPok");
 const resetButtton = document.getElementById("resetBtn");
+const loadingContainer = document.getElementById("loadingContainer");
+const scrollIcon = document.getElementById("scrollIcon");
+const scrollInfo = document.getElementById("scrollInfo");
 
 /**
  * Initializes the Pokémon application.
@@ -75,6 +77,7 @@ const resetButtton = document.getElementById("resetBtn");
  */
 async function init() {
     showSpinner();
+    checkWindowHeightAndShowLoadingButton()
     await fetchPokemonData(30, 0);
     await getPokemonInfos(allPokemonData, allPokemonInfos, allPokemonSpecies);
     renderPokemonCards(0, allPokemonData, allPokemonInfos, allPokemonSpecies, renderedForData);
@@ -224,6 +227,15 @@ async function loadMorePokemon() {
     );
     renderNewCards();
     loading = false;
+}
+
+/** 
+ * Displays a loading ball, loads more Pokemon data, and renders filter buttons. 
+ */
+async function loadMorePokemonBtn() {
+    renderLoadingBall();
+    await loadMorePokemon();
+    renderFilterButtons(allPokemonInfos);
 }
 
 /**

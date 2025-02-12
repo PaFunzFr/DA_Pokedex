@@ -1,3 +1,6 @@
+:root {
+    color: var(--common-blue);
+}
 html {
     scroll-behavior: smooth;
 }
@@ -10,9 +13,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background-color: rgb(27, 31, 52);
+    background-color: var(--common-blue);
 }
-
 
 .max-width {
     max-width: 1300px;
@@ -48,9 +50,18 @@ h3 {
 
 a {
     text-decoration: none;
-    color: black;
+    filter: drop-shadow(0 0 2px white);
+    color: var(--common-blue);
     font-family: 'Bubblegum Sans';
     font-size: 24px;
+    transition: var(--transition);
+}
+
+a:hover {
+    cursor: pointer;
+    filter: drop-shadow(0 0 5px white);
+    color: var(--button-blue);
+    transform: scale(1.04);
 }
 
 p {

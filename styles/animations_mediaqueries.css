@@ -162,18 +162,18 @@
         transform: translate(-50%, -50%) scale(1.1);
     }
 }
-/* mouse */
+
+/* SCROLL BALL*/
 .scroll-ball,
 .scroll-info {
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .scroll-info {
     flex-direction: column;
-    position: fixed;
-    user-select: none;
     position: fixed;
     width: 100%;
     z-index: 12;
