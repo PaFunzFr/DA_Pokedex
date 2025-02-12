@@ -269,6 +269,25 @@ function checkForEvolutionAndRender(evolutionHTML) {
     }
 }
 
-
+function renderFilterButtons(sourceArray) {
+    let typeButtonContainer = document.getElementById("filterContainer");
+    typeButtonContainer.innerHTML = "";
+    let uniqueTypes = new Set();
+    sourceArray.forEach((pokemon) => {
+        if (pokemon.types && pokemon.types.length > 0) {
+            let primaryType = pokemon.types[0].type.name;
+            uniqueTypes.add(primaryType);
+        }
+    });
+    uniqueTypes.forEach((type) => {
+        typeButtonContainer.innerHTML += `
+            <img 
+                src="./assets/img/04_type_icons/blank/${type}.png" 
+                class="filter-btn-type ${type}" id="filterButton-${type}" 
+                onclick="filterButton(event), scaleClickedButton(event)"
+            >
+        `;
+    });
+}
 
 

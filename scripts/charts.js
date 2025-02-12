@@ -20,8 +20,8 @@ const typeColors = {
 };
 
 // lightest Pokemon
-const chartLightest = document.getElementById('pokemonChartLightest').getContext('2d');
-const pokemonChartlightest = new Chart(chartLightest, {
+const pokemonLightest = document.getElementById('pokemonChartLightest').getContext('2d');
+const pokemonChartlightest = new Chart(pokemonLightest, {
     type: 'bar',
     data: {
         labels: ['Gastly', 'Haunter', 'Flabebe', 'Cosmog', 'Kartana', 'Gimmighoul', 'Cutiefly', 'Sinistea', 'Rotom', 'Uxie'],
@@ -93,8 +93,8 @@ const pokemonChartlightest = new Chart(chartLightest, {
 });
 
 // heaviest Pokemon
-const chartHeaviest = document.getElementById('pokemonChartHeaviest').getContext('2d');
-const pokemonChartHeaviest = new Chart(chartHeaviest, {
+const pokemonHeaviest = document.getElementById('pokemonChartHeaviest').getContext('2d');
+const pokemonChartHeaviest = new Chart(pokemonHeaviest, {
     type: 'bar',
     data: {
         labels: ['Celesteela', 'Cosmoem', 'Eternatus', 'Groudon', 'Mudsdale', 'Guzzlord', 'Dialga', 'Stakataka', 'Glastrier', 'Melmetal'],
@@ -159,8 +159,8 @@ const pokemonChartHeaviest = new Chart(chartHeaviest, {
 });
 
 // smallest Pokemon
-const chartSmallest = document.getElementById('pokemonBySizeSmall').getContext('2d');
-const pokemonChartSmallest = new Chart(chartSmallest, {
+const pokemonSmallest = document.getElementById('pokemonBySizeSmall').getContext('2d');
+const pokemonChartSmallest = new Chart(pokemonSmallest, {
     type: 'bar',
     data: {
         labels: ['Joltik', 'Flabebe', 'Cutiefly', 'Comfey', 'Cosmoem', 'Sinistea', 'Poltchageist', 'Diglett', 'Natu', 'Azurill'],
@@ -228,8 +228,8 @@ const pokemonChartSmallest = new Chart(chartSmallest, {
 });
 
 // biggest pokemon
-const ctx = document.getElementById('pokemonBySizeBig').getContext('2d');
-const pokemonChart = new Chart(ctx, {
+const pokemonBiggest = document.getElementById('pokemonBySizeBig').getContext('2d');
+const pokemonChart = new Chart(pokemonBiggest, {
     type: 'bar',
     data: {
         labels: ['Eternatus', 'Wailord', 'Dondozo', 'Celesteela', 'Steelix', 'Onix', 'Rayquaza', 'Gyarados', 'Milotic', 'Yveltal'],
@@ -338,8 +338,8 @@ new Chart(primaryTypeContainer, {
 });
 
 // pokemon by region
-const ctx5 = document.getElementById('pokemonLineChart').getContext('2d');
-const pokemonLineChart = new Chart(ctx5, {
+const pokemonRegion = document.getElementById('pokemonLineChart').getContext('2d');
+const pokemonLineChart = new Chart(pokemonRegion, {
     type: 'line',
     data: {
         labels: ['Kanto', 'Johto', 'Hoenn', 'Sinnoh', 'Ext. Sinnoh', 'Upd. Johto', 'Unova', 'Upd. Unova', 'Conquest', 'Kalos-Central', 'Kalos-Coastal', 'Kalos-Mountain', 'Upd. Hoenn', 'Alola', 'Melemele', 'Akala', 'Ulaula', 'Poni', 'Upd. Ulaula'],

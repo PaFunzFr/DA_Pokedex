@@ -1,0 +1,111 @@
+.search-banner,
+.filter-banner {
+    display: flex;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 260px;
+    max-width: 600px;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.search-banner {
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    bottom: 10px;
+    width: 50%;
+    height: 30px;
+    z-index: 11;
+    background: linear-gradient(to top, #856a00 0%, #ffcc00 6%, #fada4e 95%);
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.9));
+}
+
+.filter-banner {
+    flex-wrap: wrap-reverse;
+    justify-content: center;
+    gap: 4px;
+    bottom: 0;
+    opacity: 0;
+    border-radius: 15px 15px 0 0;
+    z-index: 10;
+    padding: 10px 12px;
+    transition: all 0.3s ease;
+}
+
+.reset-btn {
+    display: none;
+    align-items: center;
+    font-family: 'Bubblegum Sans';
+    padding: 4px 8px;
+    height: 20px;
+    background-color: #cc33c4;
+    color: white;
+    border-radius: 10px;
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+    cursor: pointer;
+}
+
+.search-bar {
+    flex: 1;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+}
+
+.filter-btn,
+.search-btn {
+    padding: 8px;
+    height: 16px;
+    width: 16px;
+    background-color: #3366cc;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 2px rgb(27, 31, 52));
+    cursor: pointer;
+}
+
+.filter-btn-type {
+    padding: 1px;
+    height: 34px;
+    width: 34px;
+    background-color: #3366cc;
+    border: 1px solid #8092b6;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 5px #183265);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close-modal-btn {
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bubblegum Sans';
+    bottom: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    font-size: 20px;
+    height: 30px;
+    width: 30px;
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.418);
+    color: white;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+
+.nextPok,
+.prevPok {
+    font-family: 'Bubblegum Sans';
+    font-size: 38px;
+    width: 50px;
+    opacity: 0.5;
+    cursor: pointer;
+    z-index: 100;
+}

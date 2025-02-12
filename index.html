@@ -7,6 +7,9 @@
     <title>Pokedex</title>
     <link rel="shortcut icon" type="image/svg" href="./assets/img/00_favicon/pokeball.svg">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/standards.css">
+    <link rel="stylesheet" href="./styles/assets.css">
+    <link rel="stylesheet" href="./styles/animations_mediaqueries.css">
     <link rel="stylesheet" href="./styles/style_type_colors.css">
     <link rel="stylesheet" href="./styles/style_variables.css">
     <link rel="stylesheet" href="./styles/fonts.css">
@@ -24,14 +27,27 @@
         </div>
     </header>
 
-    <div id="spinner" class="spinner hidden">
+    <section id="spinner" class="spinner hidden">
         <div class="spinner-border"></div>
         <div class="spinner-top"></div>
         <div class="spinner-middle"></div>
         <div class="spinner-bottom"></div>
         <div class="spinner-center"></div>
-    </div>
-    <div id="noResultsMessage">keine POKEMON!!!</div>
+    </section>
+
+    <section class="info-messages">
+        <div id="noResultsMessage">keine POKEMON!!!</div>
+    </section>
+
+    <section class="scroll-info">
+        <div class="scroll-ball">
+            <div class="ball-outer-body"></div>
+            <div class="ball-line"></div>
+            <div class="ball-inner-body"></div>
+        </div>
+        <p class="scroll-down">Scroll down</p>
+    </section>
+
     <div class="shadow-top"></div>
 
     <main>
@@ -64,4 +80,6 @@
     <script src="./data/de.js"></script>
     <script src="./templates/template.js"></script>
     <script src="script.js"></script>
+    <script src="./scripts/filter_search.js"></script>
+    <script src="./scripts/modal.js"></script>
 </html>

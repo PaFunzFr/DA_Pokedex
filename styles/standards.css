@@ -1,0 +1,102 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: rgb(27, 31, 52);
+}
+
+
+.max-width {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.hidden {
+    display: none;
+}
+
+h1, h2 {
+    font-family: 'Bubblegum Sans';
+}
+
+h1 {
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+h2 {
+    font-size: 34px;
+    margin: 5px 0 0 0;
+}
+
+h2 span {
+    font-size: 20px;
+}
+
+h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: 'Bubblegum Sans';
+    font-size: 24px;
+}
+
+p {
+    margin: 0;
+}
+
+.shadow-top,
+.shadow-bottom {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 9;
+}
+
+.shadow-top {
+    top: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgb(8, 10, 18), transparent);
+    transition: all 0.5s ease-in-out;
+}
+
+.shadow-bottom {
+    position: fixed;
+    bottom: -1px;
+    height: 160px;
+    background: linear-gradient(to top, rgba(8, 10, 18, 0.803), transparent );
+}
+
+main {
+    display: flex;
+    flex: 1;
+    margin-top: 80px;
+}
+
+.ger-sub-title {
+    opacity: 0.6;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to top, #856a00 0%, #ffcc00 6%, #fff1b3 95%);
+    padding: 12px 0 5px 0;
+    text-align: center;
+    filter: drop-shadow(0 24px 10px rgba(0, 0, 0, 0.5));
+    z-index: 49;
+}
