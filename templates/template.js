@@ -22,7 +22,7 @@ function renderPokemonCards(offset, arrayData, arrayInfos, arraySpecies, rendere
             </div>
             <h3 class="ger-sub-title">${names_de[arrayInfos[i].id -1]}</h3>
             <img class="main-pic" src="${imgSrc}" alt="${arrayInfos[i].name}">
-            <img class="poke-ball" src="../assets/img/03_general/pokeball.svg">
+            <img class="poke-ball" src="./assets/img/03_general/pokeball.svg">
             <div class="types">
                 ${arrayInfos[i].types.map(typeInfo => `
                 <img 
