@@ -68,6 +68,9 @@ const resetButtton = document.getElementById("resetBtn");
 const loadingContainer = document.getElementById("loadingContainer");
 const scrollIcon = document.getElementById("scrollIcon");
 const scrollInfo = document.getElementById("scrollInfo");
+const filterConainter = document.getElementById("filterContainer");
+const filterBtn = document.getElementById("filterButton");
+const navBar = document.getElementById("navBar");
 
 /**
  * Initializes the Pokémon application.

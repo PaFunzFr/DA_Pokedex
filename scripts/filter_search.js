@@ -77,11 +77,15 @@ function resetSearch() {
  * @returns {boolean} - True if input is too short, otherwise false.
  */
 function checkIfInputLegit(input) {
-    if (input.length < 3) {
-        console.log("Minimum input length: 3 letters");
+    if (input.length < 3 || !/^[a-zA-Z]+$/.test(input)) {
+        if (input.length < 3) {
+            renderErrorMessage("Minimum input length: 3 letters");
+        } else {
+            renderErrorMessage("Input must contain only letters");
+        }
         return true;
     }
-    resetButtton.style.display = "flex";
+    resetButtton.style.display = "flex"; // Show the reset button if input is valid
     return false;
 }
 
@@ -198,13 +202,11 @@ function styleTypeButton(element, size, border) {
  * Shows or hides the filter buttons, and toggles the filter container's visibility.
  */
 function showFilterButtons() {
-    const filterConainter = document.getElementById("filterContainer");
-    const filterButton = document.getElementById("filterButton");
     if (!filterButtonClicked) {
-        styleButton(filterConainter, filterButton, "1", "60px", "#204081");
+        styleButton(filterConainter, filterBtn, "1", "60px", "#204081", "none");
         filterButtonClicked = true;
     } else {
-        styleButton(filterConainter, filterButton, "", "", "");
+        styleButton(filterConainter, filterBtn, "", "", "", "");
         filterButtonClicked = false;
         activeFilters = [];
         resetFilter();
@@ -219,8 +221,10 @@ function showFilterButtons() {
  * @param {string} opacity - The opacity of the container.
  * @param {string} margin - The margin for the button.
  * @param {string} color - The background color for the button.
+ * @param {string} styleDisplay - The display property value for the container.
  */
-function styleButton(container, button, opacity, margin, color) {
+function styleButton(container, button, opacity, margin, color, styleDisplay) {
+    loadingContainer.style.display = styleDisplay;
     container.style.opacity = opacity;
     container.style.bottom = margin;
     button.style.backgroundColor = color;

@@ -1,5 +1,18 @@
+.nav-icon {
+    background-color: var(--button-blue);
+    padding: 6px;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    filter: drop-shadow(0 0 4px var(--button-blue));
+}
+
+.nav-icon:hover {
+    background-color: var(--common-blue);
+    transform: scale(1.02);
+}
+
 #loadButton {
-    display: "none";
     font-family: 'Bubblegum Sans';
     font-size: 30px;
     padding: 10px 20px;
@@ -9,6 +22,17 @@
     background-color: var(--button-blue);
     color: white;
     cursor: pointer;
+}
+
+#errorMessage {
+    font-family: 'Bubblegum Sans';
+    font-size: 24px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    background-color: var(--button-highlight);
+    filter: drop-shadow(0 0 4px black);
+    color: white;
 }
 
 #loadButton:hover {
@@ -57,7 +81,7 @@
     font-family: 'Bubblegum Sans';
     padding: 4px 8px;
     height: 20px;
-    background-color: #cc33c4;
+    background-color: var(--button-highlight);
     color: white;
     border-radius: 10px;
     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9));
@@ -70,6 +94,7 @@
     font-size: 16px;
     border-radius: 5px;
     border: none;
+    min-width: 100px;
 }
 
 .filter-btn,

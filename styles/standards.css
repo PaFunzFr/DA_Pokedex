@@ -1,14 +1,16 @@
 :root {
     color: var(--common-blue);
+
 }
 html {
     scroll-behavior: smooth;
+    
 }
 
 body {
     display: flex;
     flex-direction: column;
-    font-family: Arial, sans-serif;
+    font-family: 'Abel';
     background-color: #f8f8f8;
     margin: 0;
     padding: 0;
@@ -19,6 +21,14 @@ body {
 .max-width {
     max-width: 1300px;
     margin: 0 auto;
+}
+
+.mobile {
+    display: none;
+}
+
+.desktop {
+    display: block;
 }
 
 .hidden {
@@ -45,7 +55,7 @@ h2 span {
 
 h3 {
     margin: 0;
-    font-size: 14px;
+    font-size: 18px;
 }
 
 a {
@@ -66,6 +76,17 @@ a:hover {
 
 p {
     margin: 0;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: linear-gradient(to top, #856a00 0%, #ffcc00 6%, #fff1b3 95%);
+    padding: 12px 0 5px 0;
+    text-align: center;
+    filter: drop-shadow(0 24px 10px rgba(0, 0, 0, 0.5));
+    z-index: 49;
 }
 
 .shadow-top,
@@ -101,13 +122,3 @@ main {
     opacity: 0.6;
 }
 
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: linear-gradient(to top, #856a00 0%, #ffcc00 6%, #fff1b3 95%);
-    padding: 12px 0 5px 0;
-    text-align: center;
-    filter: drop-shadow(0 24px 10px rgba(0, 0, 0, 0.5));
-    z-index: 49;
-}

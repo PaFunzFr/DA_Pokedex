@@ -389,3 +389,20 @@ function renderLoadingBtn() {
     `;
 }
 
+/**
+ * Displays an error message in the loading container and resets the filter button.
+ * After 1 second, it re-renders the loading ball.
+ * 
+ * @param {string} errorMessage - The error message to display.
+ */
+function renderErrorMessage(errorMessage) {
+    styleButton(filterConainter, filterBtn, "", "", "", "");
+    filterButtonClicked = false;
+    loadingContainer.style.animation = "none";
+    loadingContainer.innerHTML = `<div id="errorMessage">${errorMessage}</div>`;
+    setTimeout(() => {
+        renderLoadingBall();
+    }, 1400);
+}
+
+
