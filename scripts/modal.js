@@ -307,7 +307,6 @@ async function renderPrevPok(index, infoSource, speciesSource, renderedFor) {
  * @param {string} renderedFor - A label to specify who the Pokémon cards are being rendered for (search or common data-array).
  */
 function hideNextButtonIfLast(index, infoSource, renderedFor) {
-    console.log("triggered" + index);
     if (renderedFor === "searchedData") {
         const nextButton = document.getElementById(`nxt-${renderedFor}${index}`);
         if (index >= infoSource.length - 1 && nextButton) {
