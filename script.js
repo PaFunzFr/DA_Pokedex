@@ -56,7 +56,9 @@ let filterDataName = "commonData";
 const renderedForData = "commonData";
 const renderedForSearch = "searchedData";
 
-// DOM Elements
+/**
+all loaded DOM Elements
+ */
 const pokemonContainer = document.getElementById("pokemonContainer");
 const loadButton = document.getElementById("loadButton");
 const pokemonDetailModal = document.getElementById("pokemonDetailModal");
