@@ -1,3 +1,12 @@
+/**
+ * Renders the Pokémon cards for display on the page.
+ * 
+ * @param {number} offset The index at which to start rendering the Pokémon cards.
+ * @param {Object[]} arrayData The data array containing Pokémon information.
+ * @param {Object[]} arrayInfos The array containing detailed information about each Pokémon.
+ * @param {Object[]} arraySpecies The array containing species-related information for each Pokémon.
+ * @param {string} renderedFor A label to specify who the Pokémon cards are being rendered for (search or common data-array).
+ */
 function renderPokemonCards(offset, arrayData, arrayInfos, arraySpecies, renderedFor) {
     for (let i = offset; i < arrayData.length; i++) {
         const card = document.createElement("div");
@@ -32,6 +41,15 @@ function renderPokemonCards(offset, arrayData, arrayInfos, arraySpecies, rendere
     }
 }
 
+/**
+ * Renders the modal for a specific Pokémon's detailed view.
+ * 
+ * @param {number} index The index of the Pokémon to display in the modal.
+ * @param {Object[]} arrayInfos The array containing detailed information about each Pokémon.
+ * @param {Object[]} arraySpecies The array containing species-related information for each Pokémon.
+ * @param {string} renderedFor A label to specify who the Pokémon cards are being rendered for (search or common data-array).
+ * @returns {string} The HTML string that represents the Pokémon modal.
+ */
 function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
     let pokId = arrayInfos[index].id;
     return pokemonDetailModal.innerHTML = `
@@ -64,6 +82,11 @@ function renderModal(index, arrayInfos, arraySpecies, renderedFor) {
         </div>`;
 }
 
+/**
+ * Renders a graph displaying the Pokémon's attributes in a bar chart.
+ * 
+ * @param {Object} arrayInfo The detailed information about a single Pokémon.
+ */
 function renderGraphAttributes(arrayInfo) {
     const labels = ["Health", "Attack", "Defense", "Special-Atk", "Special-Def", "Speed"];
     const data = arrayInfo.stats.map(stat => stat.base_stat); 
@@ -108,6 +131,12 @@ function renderGraphAttributes(arrayInfo) {
     });
 }
 
+/**
+ * Renders the general stats of a Pokémon, such as base experience, height, weight, etc.
+ * 
+ * @param {Object} infoSource The detailed information about the Pokémon.
+ * @param {Object} speciesSource The species-related information for the Pokémon.
+ */
 function showGeneralStats(infoSource, speciesSource) {
     document.getElementById('modalContent').innerHTML = "";
     document.getElementById('modalContent').innerHTML = `
@@ -156,6 +185,11 @@ function showGeneralStats(infoSource, speciesSource) {
     `;
 }
 
+/**
+ * Renders the shiny form of a Pokémon in the modal.
+ * 
+ * @param {Object} infoSource The detailed information about the Pokémon, including the shiny form pictures.
+ */
 function renderForms(infoSource) {
     document.getElementById('modalContent').innerHTML = "";
     document.getElementById('modalContent').innerHTML = `
@@ -167,6 +201,12 @@ function renderForms(infoSource) {
     `;
 }
 
+/**
+ * Retrieves the gender distribution for a Pokémon species based on the gender rate.
+ * 
+ * @param {Object} speciesSource The species-related information for the Pokémon.
+ * @returns {string} A string representing the gender distribution of the Pokémon species.
+ */
 function getGenderRate(speciesSource) {
     let genderRate = speciesSource.gender_rate;
     const maleSymbol = `<img class="female" src="./assets/img/03_general/male.svg">`;
@@ -208,6 +248,11 @@ function getGenderRate(speciesSource) {
     return genderText;
 }
 
+/**
+ * Renders the evolution chain for the given species.
+ * Fetches the evolution data and generates HTML to display the evolution steps.
+ * @param {Array} arraySpecies - Array of species data to generate the evolution chain for.
+ */
 async function renderEvolutionChain(arraySpecies) {
     try {
         const evolutions = await fetchEvolutionChain(arraySpecies);
@@ -223,6 +268,11 @@ async function renderEvolutionChain(arraySpecies) {
     }
 }
 
+/**
+ * Renders the first evolution step, if it exists.
+ * @param {Object} evolutions - Evolution chain data.
+ * @returns {string} HTML content for the first evolution step.
+ */
 function renderFirstEvolution(evolutions) {
     if (!evolutions.chain.evolves_to.length) {
         return "";
@@ -236,6 +286,11 @@ function renderFirstEvolution(evolutions) {
         <img src="./assets/img/03_general/arrow2.png" class="evo-arrow">`;
 }
 
+/**
+ * Renders the second evolution step, if it exists.
+ * @param {Object} evolutions - Evolution chain data.
+ * @returns {string} HTML content for the second evolution step.
+ */
 function renderSecondEvolution(evolutions) {
     if (evolutions.chain.evolves_to?.[0]?.species?.url) {
         const secondPokemonId = evolutions.chain.evolves_to[0].species.url.split('/')[6];
@@ -248,6 +303,11 @@ function renderSecondEvolution(evolutions) {
     return "";
 }
 
+/**
+ * Renders the third evolution step, if it exists.
+ * @param {Object} evolutions - Evolution chain data.
+ * @returns {string} HTML content for the third evolution step.
+ */
 function renderThirdEvolution(evolutions) {
     if (evolutions.chain.evolves_to?.[0]?.evolves_to?.[0]?.species?.url) {
         const thirdPokemonId = evolutions.chain.evolves_to[0].evolves_to[0].species.url.split('/')[6];
@@ -261,6 +321,11 @@ function renderThirdEvolution(evolutions) {
     return "";
 }
 
+/**
+ * Checks if any evolution steps were rendered and updates the modal with the evolution data.
+ * If no evolution steps are available, displays a message indicating that there is no evolution for the Pokémon.
+ * @param {string} evolutionHTML - HTML content for the evolution steps.
+ */
 function checkForEvolutionAndRender(evolutionHTML) {
     if (evolutionHTML === "<div class='evolution-container'></div>") {
         document.getElementById('modalContent').innerHTML = "<p>There is no evolution for this Pokemon</p>";
@@ -269,6 +334,11 @@ function checkForEvolutionAndRender(evolutionHTML) {
     }
 }
 
+/**
+ * Renders filter buttons for Pokémon types, based on the given source array.
+ * Creates a set of unique Pokémon types and adds filter buttons for each.
+ * @param {Array} sourceArray - Array of Pokémon data to extract types from.
+ */
 function renderFilterButtons(sourceArray) {
     let typeButtonContainer = document.getElementById("filterContainer");
     typeButtonContainer.innerHTML = "";
